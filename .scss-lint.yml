@@ -1,0 +1,11 @@
+scss_files: 'assets/css/scss/*.scss'
+
+linters:
+  Comment:
+    enabled: false
+
+  Indentation:
+    enabled: false
+
+  PropertySortOrder:
+    enabled: false

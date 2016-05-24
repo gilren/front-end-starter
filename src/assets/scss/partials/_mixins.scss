@@ -1,0 +1,19 @@
+@mixin links ($link, $visited, $hover, $active) {
+    & {
+        color: $link;
+        &:visited {
+            color: $visited;
+        }
+        &:hover {
+            color: $hover;
+        }
+        &:active, &:focus {
+            color: $active;
+        }
+    }
+}
+
+/*usage
+a {
+    @include links(orange, blue, yellow, teal);
+}*/
