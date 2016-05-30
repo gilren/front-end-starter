@@ -9,9 +9,10 @@ $ npm install --global gulp-cli
 
 Main process
 <pre>
-$ git clone https://github.com/gilren/Front-End-Boilerplate.git project name
+$ git clone https://github.com/gilren/front-end-starter.git project name
 $ cd project name
 $ npm install
+$ bower update
 $ gulp
 </pre>
 
