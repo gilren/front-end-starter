@@ -100,10 +100,12 @@ gulp.task('bootstrap', ['fonts'], function() {
 gulp.task('scss', ['bootstrap'], function() {
     return gulp.src([bases.src + '/' + path.scss + '/*.scss', bases.src + '/' + path.scss + '/pages/*.scss'])
         .pipe($.plumber())
+        .pipe($.sourcemaps.init())
         .pipe($.sass().on('error', $.sass.logError))
         .pipe($.autoprefixer({
             browsers: browser_support
         }))
+        .pipe($.sourcemaps.write('./'))
         .pipe(gulp.dest(bases.src + '/' + path.css + '/'))
         .pipe($.size())
         .pipe(reload({
