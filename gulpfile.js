@@ -34,7 +34,7 @@ reload = browserSync.reload;
  * Tasks
  * Available tasks:
  *   `gulp`
- *   `gulp watch`
+ *   `gulp prod`
  * ======================================================================== */
 
 gulp.task('default', ['compile'], function() {
