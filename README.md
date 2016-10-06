@@ -7,7 +7,7 @@ You need Gulp installed globally:
 $ npm install --global gulp-cli
 </pre>
 
-Main process
+#### - Main process
 <pre>
 $ git clone https://github.com/gilren/front-end-starter.git project name
 $ cd project name
@@ -16,12 +16,12 @@ $ bower update
 $ gulp
 </pre>
 
-Make a prod version
+#### - Make a prod version
 <pre>
 $ gulp prod
 </pre>
 
-(Optional) Remove git history
+#### - (Optional) Remove git history
 <pre>
 $ cd project name
 $ rm -rf .git
@@ -29,4 +29,10 @@ $ git init
 $ git add .
 $ git commit -m "Initial commit"
 </pre>
+
+### TODOS
+- [x] Min css
+- [ ] Min js
+- [x] Min images
+- [ ] Svgsprite
 

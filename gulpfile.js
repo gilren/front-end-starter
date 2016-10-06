@@ -1,4 +1,4 @@
-var options, bases, path, browser_support, gulp, $, browserSync, notify, del, reload;
+var bases, path, minify, path, opts, images_options, browser_support, gulp, $, browserSync, del, reload;
 
 /* ========================================================================
  *
@@ -14,14 +14,31 @@ path = {
   //proxy: 'local.dev/my/server/lol',
   bootstrap_sass: './bower_components/bootstrap-sass',
   server: './',
+  img: 'assets/img',
   scss: 'assets/scss',
   js: 'assets/js',
   css: 'assets/css',
   fonts: 'assets/fonts',
-  refresh: [bases.src + '/' + '**/*.html', bases.src + '/' + '**/*.php', bases.src + '/' + 'assets/js' + '/' + '**/*.js']
+  refresh: [bases.src + '/' + '**/*.html', bases.src + '/' + '**/*.php']
 };
 
-browser_support = ['last 2 versions'];
+opts = {
+  notify: false,
+  open: true,
+  files: [bases.src + '/' + path.refresh]
+};
+
+images_options = {
+  imageMin: {
+    optimizationLevel: 3,
+    progressive: true,
+    interlaced: true
+  }
+};
+
+minify = true;
+
+browser_support = ['ie >= 8', 'last 3 versions'];
 
 gulp = require('gulp');
 $ = require('gulp-load-plugins')();
@@ -37,57 +54,25 @@ reload = browserSync.reload;
  *   `gulp prod`
  * ======================================================================== */
 
-gulp.task('default', ['compile'], function() {
-
-  var opts;
-  opts = {
-    notify: false,
-    open: true
-  };
-  if (path.proxy) {
-    opts.proxy = path.proxy;
-  } else {
-    opts.server = {
-      baseDir: path.server + '/' + bases.src
-    };
-  }
-  browserSync(opts);
-  $.watch(bases.src + '/' + path.scss + '/**/*.scss', function() {
-    return gulp.start('scss');
-  });
-  return $.watch(path.refresh, reload);
-});
-
-// dev task
-// compile scss
-gulp.task('compile', ['scss']);
-
-// delete dist folder, run dev task, copy files into dist
-gulp.task('prod', ['clean', 'compile', 'copy'], function() {
-  var opts;
-  opts = {
-    notify: false,
-    open: true
-  };
-  if (path.boot) {
-    opts.proxy = path.proxy;
-  } else {
-    opts.server = {
-      baseDir: path.server + '/' + bases.dist
-    };
-  }
-  browserSync(opts);
-});
+// images
+gulp.task('images', function() {
+  return gulp.src([
+    bases.src + '/' + path.img + '/**/*',
+    '!' + bases.src + '/' + path.img + 'vectors/**/*'])
+    .pipe($.plumber())
+    .pipe($.changed(bases.dist + '/' + path.img))
+    .pipe($.imagemin(images_options))
+    .pipe(gulp.dest(bases.dist + '/' + path.img + '/'));
+})
 
 // copy bootstrap required fonts
 gulp.task('fonts', function() {
-  return gulp
-    .src(path.bootstrap_sass + '/assets/fonts/**/*')
+  return gulp.src(path.bootstrap_sass + '/assets/fonts/**/*')
     .pipe(gulp.dest(bases.src + '/' + path.fonts));
 });
 
 // make a bootstrap file
-gulp.task('bootstrap', ['fonts'], function() {
+gulp.task('bootstrap', gulp.series('fonts', function() {
   return gulp.src(bases.src + '/' + path.scss + '/vendor/*.scss')
     .pipe($.plumber())
     .pipe($.sass({
@@ -96,11 +81,11 @@ gulp.task('bootstrap', ['fonts'], function() {
     .pipe($.rename('bootstrap.css'))
     .pipe(gulp.dest(bases.src + '/' + path.css + '/vendor'))
     .pipe($.size())
-});
+}));
 
 // compile scss
-gulp.task('scss', ['bootstrap'], function() {
-  return gulp.src([bases.src + '/' + path.scss + '/*.scss', bases.src + '/' + path.scss + '/pages/*.scss'])
+gulp.task('styles', gulp.series('bootstrap', function() {
+  return gulp.src([bases.src + '/' + path.scss + '/*.scss'])
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
     .pipe($.sass().on('error', $.sass.logError))
@@ -114,7 +99,22 @@ gulp.task('scss', ['bootstrap'], function() {
     .pipe(reload({
       stream: true
     }));
-});
+}));
+
+gulp.task('min', gulp.series('styles', function() {
+  return gulp.src([bases.src + '/' + path.css + '/vendor/*.css'], [bases.src + '/' + path.css + '/main.css'])
+    .pipe($.plumber())
+    .pipe(minify ? $.concat('main.min.css') : {})
+    .pipe(minify ? $.cssnano() : {})
+    .pipe(gulp.dest(bases.src + '/' + path.css + '/'));
+}))
+
+gulp.task('min-js', gulp.series('bootstrap', function() {
+  return gulp.src([bases.src + '/' + path.js + '/lib/jquery.min.js'], [bases.src + '/' + path.js + '/lib/bootstrap.min.js'], [bases.src + '/' + path.js + '/main.js'])
+    .pipe($.plumber())
+    .pipe(minify ? $.concat('main.min.js') : {})
+    .pipe(gulp.dest(bases.src + '/' + path.js + '/'));
+}))
 
 // Clean folder dist
 gulp.task('clean', function() {
@@ -122,15 +122,31 @@ gulp.task('clean', function() {
 });
 
 // Copy files into dist
-gulp.task('copy', ['clean'], function() {
-  return gulp.src(
-      [
-        bases.src + '/**',
-        '!' + bases.src + '/' + path.scss + '{,/**}'
-      ], {
-        dot: true
-      })
-    .pipe($.plumber())
-    .pipe(gulp.dest(bases.dist))
-    .pipe($.size());
-});
+gulp.task('copy', gulp.series('clean', function() {
+  return gulp.src([
+    bases.src + '/**',
+    '!' + bases.src + '/' + path.scss + '{,/**}',
+    '!' + bases.src + '/' + path.css + '{,/*.map}'], {
+      dot: true
+    })
+  .pipe($.plumber())
+  .pipe(gulp.dest(bases.dist))
+  .pipe($.size());
+}));
+
+gulp.task('watch', function() {
+  if (path.proxy) {
+    opts.proxy = path.proxy;
+  } else {
+    opts.server = {
+      baseDir: path.server + '/' + bases.src
+    };
+  }
+  browserSync(opts);
+
+  gulp.watch([bases.src + '/' + path.scss + '/**/*'], gulp.series('styles'));
+  //gulp.watch([bases.src + 'scripts/**/*'], ['jshint', 'scripts']);
+})
+
+gulp.task('default', gulp.series('watch', function() {}));
+gulp.task('prod', gulp.series('clean', 'min', 'min-js', 'copy', 'images'));
