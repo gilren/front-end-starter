@@ -21,13 +21,23 @@ $ gulp
 $ gulp prod
 </pre>
 
-#### - (Optional) Remove git history
+##### - (Optional) Remove git history
 <pre>
 $ cd project name
 $ rm -rf .git
 $ git init
 $ git add .
 $ git commit -m "Initial commit"
+</pre>
+
+##### - Available tasks
+<pre>
+$ gulp
+$ gulp prod
+$ gulp min
+$ gulp min-js
+$ gulp clean
+$ gulp copy
 </pre>
 
 ### TODOS

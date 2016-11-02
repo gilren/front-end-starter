@@ -52,6 +52,10 @@ reload = browserSync.reload;
  * Available tasks:
  *   `gulp`
  *   `gulp prod`
+ *   `gulp min`
+ *   `gulp min-js`
+ *   `gulp clean`
+ *   `gulp copy`
  * ======================================================================== */
 
 // images
