@@ -1,8 +1,8 @@
 {
-  "name": "gulp_config",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "front-end-starter",
+  "version": "1.1.0",
+  "description": "General front-end project boilerplate",
+  "main": "main.js",
   "scripts": {
     "update": "npm-check-updates -u"
   },
@@ -16,16 +16,12 @@
     "gulp-sourcemaps": "*"
   },
   "devDependencies": {
-    "bootstrap-sass": "^3.3.6",
     "browser-sync": "^2.11.2",
     "del": "^2.2.0",
-    "gulp-bower": "0.0.13",
     "gulp-browserify": "^0.5.1",
-    "gulp-clean-css": "2.0.4",
     "gulp-combine-mq": "^0.4.0",
     "gulp-cssnano": "^2.1.0",
     "gulp-load-plugins": "^1.2.0",
-    "gulp-rename": "^1.2.2",
     "gulp-size": "^2.0.0",
     "gulp-util": "^3.0.7",
     "gulp-uglify": "^1.4.2",

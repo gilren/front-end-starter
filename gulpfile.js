@@ -12,7 +12,6 @@ bases = {
 
 path = {
   //proxy: 'local.dev/my/server/lol',
-  bootstrap_sass: './bower_components/bootstrap-sass',
   server: './',
   scss: 'assets/scss',
   js: 'assets/js',
@@ -79,27 +78,8 @@ gulp.task('prod', ['clean', 'compile', 'copy'], function() {
   browserSync(opts);
 });
 
-// copy bootstrap required fonts
-gulp.task('fonts', function() {
-  return gulp
-    .src(path.bootstrap_sass + '/assets/fonts/**/*')
-    .pipe(gulp.dest(bases.src + '/' + path.fonts));
-});
-
-// make a bootstrap file
-gulp.task('bootstrap', ['fonts'], function() {
-  return gulp.src(bases.src + '/' + path.scss + '/vendor/*.scss')
-    .pipe($.plumber())
-    .pipe($.sass({
-      includePaths: [path.bootstrap_sass + '/assets/stylesheets']
-    }).on('error', $.sass.logError))
-    .pipe($.rename('bootstrap.css'))
-    .pipe(gulp.dest(bases.src + '/' + path.css + '/vendor'))
-    .pipe($.size())
-});
-
 // compile scss
-gulp.task('scss', ['bootstrap'], function() {
+gulp.task('scss', function() {
   return gulp.src([bases.src + '/' + path.scss + '/*.scss', bases.src + '/' + path.scss + '/pages/*.scss'])
     .pipe($.plumber())
     .pipe($.sourcemaps.init())

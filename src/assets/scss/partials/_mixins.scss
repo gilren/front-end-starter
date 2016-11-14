@@ -1,53 +1,47 @@
 @mixin links ($link, $visited, $hover, $active) {
-    & {
-        color: $link;
-        &:visited {
-            color: $visited;
-        }
-        &:hover {
-            color: $hover;
-        }
-        &:active, &:focus {
-            color: $active;
-        }
+  & {
+    color: $link;
+    &:visited {
+      color: $visited;
     }
+    &:hover {
+      color: $hover;
+    }
+    &:active, &:focus {
+      color: $active;
+    }
+  }
 }
 
-/*usage
-a {
-    @include links(orange, blue, yellow, teal);
-}*/
+// usage a { @include links(orange, blue, yellow, teal)}
 
 
 // scss
 @mixin placeholder {
-    &::-webkit-input-placeholder {
-        @content
-    }
-    &::-moz-placeholder {
-        @content
-    }
-    &:-ms-input-placeholder {
-        @content
-    }
+  &::-webkit-input-placeholder {
+    @content
+  }
+  &::-moz-placeholder {
+    @content
+  }
+  &::-ms-input-placeholder {
+    @content
+  }
 }
 
 @mixin center($direction: both) {
-    position: absolute;
-    @if $direction==both {
-        top: 50%;
-        left: 50%;
-        -webkit-transform: translateXY(-50%, -50%);
-        transform: translateXY(-50%, -50%);
-    }
-    @else if $direction==horizontal {
-        left: 50%;
-        -webkit-transform: translateXY(-50%, 0);
-        transform: translateXY(-50%, 0);
-    }
-    @else if $direction==vertical {
-        top: 50%;
-        -webkit-transform: translateXY(0, -50%);
-        transform: translateXY(0, -50%);
-    }
+  position: absolute;
+  @if $direction==both {
+    top: 50%;
+    left: 50%;
+    transform: translateXY(-50%, -50%);
+  }
+  @else if $direction==horizontal {
+    left: 50%;
+    transform: translateXY(-50%, 0);
+  }
+  @else if $direction==vertical {
+    top: 50%;
+    transform: translateXY(0, -50%);
+  }
 }

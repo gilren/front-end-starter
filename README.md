@@ -1,4 +1,4 @@
-# Front end boilerplate
+# Front end boilerplate without bootstrap
 
 ### Installation
 
@@ -12,7 +12,6 @@ Main process
 $ git clone https://github.com/gilren/front-end-starter.git project name
 $ cd project name
 $ npm install
-$ bower update
 $ gulp
 </pre>
 
