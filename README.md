@@ -42,7 +42,7 @@ $ gulp copy
 
 ### TODOS
 - [x] Min css
-- [ ] Min js
+- [x] Min js
 - [x] Min images
 - [ ] Svgsprite
 
