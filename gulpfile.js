@@ -1,4 +1,4 @@
-var bases, path, minify, path, opts, images_options, browser_support, gulp, $, browserSync, del, reload;
+var bases, path, minify, path, opts, images_options, browser_support, gulp, $, browserSync, del, reload
 
 /* ========================================================================
  *
@@ -8,7 +8,7 @@ var bases, path, minify, path, opts, images_options, browser_support, gulp, $, b
 bases = {
   src: 'src',
   dist: 'dist'
-};
+}
 
 path = {
   //proxy: 'local.dev/my/server/lol',
@@ -20,13 +20,13 @@ path = {
   css: 'assets/css',
   fonts: 'assets/fonts',
   refresh: [bases.src + '/' + '**/*.html', bases.src + '/' + '**/*.php']
-};
+}
 
 opts = {
   notify: false,
   open: true,
   files: [bases.src + '/' + path.refresh]
-};
+}
 
 images_options = {
   imageMin: {
@@ -34,17 +34,17 @@ images_options = {
     progressive: true,
     interlaced: true
   }
-};
+}
 
-minify = true;
+minify = true
 
-browser_support = ['ie >= 8', 'last 3 versions'];
+browser_support = ['ie >= 9', 'last 3 versions']
 
-gulp = require('gulp');
-$ = require('gulp-load-plugins')();
-browserSync = require('browser-sync');
-del = require('del');
-reload = browserSync.reload;
+gulp = require('gulp')
+$ = require('gulp-load-plugins')()
+browserSync = require('browser-sync')
+del = require('del')
+reload = browserSync.reload
 
 /* ========================================================================
  *
@@ -52,11 +52,12 @@ reload = browserSync.reload;
  * Available tasks:
  *   `gulp`
  *   `gulp prod`
- *   `gulp min`
+ *   `gulp min-css`
  *   `gulp min-js`
  *   `gulp clean`
  *   `gulp copy`
  * ======================================================================== */
+
 
 // images
 gulp.task('images', function() {
@@ -66,17 +67,18 @@ gulp.task('images', function() {
     .pipe($.plumber())
     .pipe($.changed(bases.dist + '/' + path.img))
     .pipe($.imagemin(images_options))
-    .pipe(gulp.dest(bases.dist + '/' + path.img + '/'));
+    .pipe(gulp.dest(bases.dist + '/' + path.img + '/'))
 })
 
 // copy bootstrap required fonts
 gulp.task('fonts', function() {
   return gulp.src(path.bootstrap_sass + '/assets/fonts/**/*')
-    .pipe(gulp.dest(bases.src + '/' + path.fonts));
-});
+    .pipe(gulp.dest(bases.src + '/' + path.fonts))
+    .pipe($.size())
+})
 
 // make a bootstrap file
-gulp.task('bootstrap', gulp.series('fonts', function() {
+gulp.task('bootstrap', function() {
   return gulp.src(bases.src + '/' + path.scss + '/vendor/*.scss')
     .pipe($.plumber())
     .pipe($.sass({
@@ -85,10 +87,10 @@ gulp.task('bootstrap', gulp.series('fonts', function() {
     .pipe($.rename('bootstrap.css'))
     .pipe(gulp.dest(bases.src + '/' + path.css + '/vendor'))
     .pipe($.size())
-}));
+})
 
 // compile scss
-gulp.task('styles', gulp.series('bootstrap', function() {
+gulp.task('styles', function() {
   return gulp.src([bases.src + '/' + path.scss + '/*.scss'])
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
@@ -102,55 +104,75 @@ gulp.task('styles', gulp.series('bootstrap', function() {
     .pipe($.size())
     .pipe(reload({
       stream: true
-    }));
-}));
+    }))
+})
 
-gulp.task('min', gulp.series('styles', function() {
-  return gulp.src([bases.src + '/' + path.css + '/vendor/*.css'], [bases.src + '/' + path.css + '/main.css'])
+// Minify css
+gulp.task('min-css', function() {
+  return gulp.src([
+    bases.src + '/' + path.css + '/vendor/bootstrap.css',
+    bases.src + '/' + path.css + '/main.css'
+  ])
     .pipe($.plumber())
-    .pipe(minify ? $.concat('main.min.css') : {})
-    .pipe(minify ? $.cssnano() : {})
-    .pipe(gulp.dest(bases.src + '/' + path.css + '/'));
-}))
+    .pipe($.concat('main.css'))
+    .pipe(gulp.dest(bases.dist + '/' + path.css + '/'))
+    .pipe($.rename('all.min.css'))
+    .pipe(minify ? $.cssnano({
+      discardComments: {removeAll: true}
+    }) : {})
+    .pipe(gulp.dest(bases.dist + '/' + path.css + '/'))
+    .pipe($.size())
+})
 
-gulp.task('min-js', gulp.series('bootstrap', function() {
-  return gulp.src([bases.src + '/' + path.js + '/lib/jquery.min.js'], [bases.src + '/' + path.js + '/lib/bootstrap.min.js'], [bases.src + '/' + path.js + '/main.js'])
+// Minify js
+gulp.task('min-js', function() {
+  return gulp.src([
+  //bases.src + '/' + path.js + '/lib/test.js',
+    bases.src + '/' + path.js + '/main.js'
+  ])
     .pipe($.plumber())
-    .pipe(minify ? $.concat('main.min.js') : {})
-    .pipe(gulp.dest(bases.src + '/' + path.js + '/'));
-}))
+    .pipe($.concat('main.js'))
+    .pipe(gulp.dest(bases.dist + '/' + path.js + '/'))
+    .pipe($.rename('all.min.js'))
+    .pipe($.uglify({preserveComments: 'none'}))
+    .pipe(gulp.dest(bases.dist + '/' + path.js + '/'))
+    .pipe($.size())
+})
 
 // Clean folder dist
 gulp.task('clean', function() {
-  return del([bases.dist]);
-});
+  return del([bases.dist])
+})
 
 // Copy files into dist
-gulp.task('copy', gulp.series('clean', function() {
+gulp.task('copy', function() {
   return gulp.src([
     bases.src + '/**',
-    '!' + bases.src + '/' + path.scss + '{,/**}',
-    '!' + bases.src + '/' + path.css + '{,/*.map}'], {
-      dot: true
-    })
+    '!' + bases.src + '/' + path.js,
+    '!' + bases.src + '/' + path.js + '/**',
+    '!' + bases.src + '/' + path.scss,
+    '!' + bases.src + '/' + path.scss + '/**',
+    '!' + bases.src + '/' + path.css,
+    '!' + bases.src + '/' + path.css + '/**'])
   .pipe($.plumber())
   .pipe(gulp.dest(bases.dist))
-  .pipe($.size());
-}));
+  .pipe($.size())
+})
 
 gulp.task('watch', function() {
   if (path.proxy) {
-    opts.proxy = path.proxy;
+    opts.proxy = path.proxy
   } else {
     opts.server = {
       baseDir: path.server + '/' + bases.src
-    };
+    }
   }
-  browserSync(opts);
+  browserSync(opts)
 
-  gulp.watch([bases.src + '/' + path.scss + '/**/*'], gulp.series('styles'));
-  //gulp.watch([bases.src + 'scripts/**/*'], ['jshint', 'scripts']);
+  gulp.watch([bases.src + '/' + path.scss + '/**/*'], gulp.series('fonts', 'bootstrap', 'styles'))
+  //gulp.watch([bases.src + 'scripts/**/*'], ['jshint', 'scripts'])
+  return $.watch(path.refresh, reload);
 })
 
-gulp.task('default', gulp.series('watch', function() {}));
-gulp.task('prod', gulp.series('clean', 'min', 'min-js', 'copy', 'images'));
+gulp.task('default', gulp.series('watch', function() {}))
+gulp.task('prod', gulp.series('clean', gulp.parallel('fonts', 'bootstrap') , 'styles' , 'copy', gulp.parallel('min-css', 'min-js'), 'images'))
