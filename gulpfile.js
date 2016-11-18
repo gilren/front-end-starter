@@ -5,6 +5,8 @@ var bases, path, minify, path, opts, images_options, browser_support, gulp, $, b
  * Configuration
  * ======================================================================== */
 
+minify = true
+
 bases = {
   src: 'src',
   dist: 'dist'
@@ -19,13 +21,12 @@ path = {
   js: 'assets/js',
   css: 'assets/css',
   fonts: 'assets/fonts',
-  refresh: [bases.src + '/' + '**/*.html', bases.src + '/' + '**/*.php']
+  refresh: [bases.src + '/' + 'assets/js' + '/**/*.js', bases.src + '/' + '**/*.html', bases.src + '/' + '**/*.php']
 }
 
 opts = {
   notify: false,
-  open: true,
-  files: [bases.src + '/' + path.refresh]
+  open: true
 }
 
 images_options = {
@@ -35,8 +36,6 @@ images_options = {
     interlaced: true
   }
 }
-
-minify = true
 
 browser_support = ['ie >= 9', 'last 3 versions']
 
@@ -68,6 +67,7 @@ gulp.task('images', function() {
     .pipe($.changed(bases.dist + '/' + path.img))
     .pipe($.imagemin(images_options))
     .pipe(gulp.dest(bases.dist + '/' + path.img + '/'))
+    .pipe($.size())
 })
 
 // copy bootstrap required fonts
@@ -170,7 +170,6 @@ gulp.task('watch', function() {
   browserSync(opts)
 
   gulp.watch([bases.src + '/' + path.scss + '/**/*'], gulp.series('fonts', 'bootstrap', 'styles'))
-  //gulp.watch([bases.src + 'scripts/**/*'], ['jshint', 'scripts'])
   return $.watch(path.refresh, reload);
 })
 
