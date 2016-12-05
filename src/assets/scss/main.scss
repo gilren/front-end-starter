@@ -1,0 +1,29 @@
+@import "partials/variables";
+@import "partials/typography";
+@import "partials/mixins";
+
+html,
+body
+{
+    height: 100%; margin: 0;
+}
+
+.container
+{
+    position: relative;
+
+    overflow: hidden;
+
+    max-width: 100vh;
+    max-height: 100%;
+    margin: 0 auto;
+
+    &::before
+    {
+        display: block;
+
+        margin-top: 100%;
+
+        content: '';
+    }
+}
