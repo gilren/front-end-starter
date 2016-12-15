@@ -1,9 +1,12 @@
+
 var bases, path, minify, path, opts, images_options, browser_support, gulp, $, browserSync, del, reload
 
 /* ========================================================================
  *
  * Configuration
  * ======================================================================== */
+
+minify = true
 
 bases = {
   src: 'src',
@@ -18,13 +21,12 @@ path = {
   js: 'assets/js',
   css: 'assets/css',
   fonts: 'assets/fonts',
-  refresh: [bases.src + '/' + '**/*.html', bases.src + '/' + '**/*.php']
+  refresh: [bases.src + '/' + 'assets/js' + '/**/*.js', bases.src + '/' + '**/*.html', bases.src + '/' + '**/*.php']
 }
 
 opts = {
   notify: false,
-  open: true,
-  files: [bases.src + '/' + path.refresh]
+  open: true
 }
 
 images_options = {
@@ -35,9 +37,7 @@ images_options = {
   }
 }
 
-minify = true
-
-browser_support = ['ie >= 9', 'last 3 versions']
+browser_support = ['last 2 versions']
 
 gulp = require('gulp')
 $ = require('gulp-load-plugins')()
@@ -67,32 +67,12 @@ gulp.task('images', function() {
     .pipe($.changed(bases.dist + '/' + path.img))
     .pipe($.imagemin(images_options))
     .pipe(gulp.dest(bases.dist + '/' + path.img + '/'))
+    .pipe($.size())
 })
 
-// dev task
 // compile scss
-gulp.task('compile', ['scss']);
-
-// delete dist folder, run dev task, copy files into dist
-gulp.task('prod', ['clean', 'compile', 'copy'], function() {
-  var opts;
-  opts = {
-    notify: false,
-    open: true
-  };
-  if (path.boot) {
-    opts.proxy = path.proxy;
-  } else {
-    opts.server = {
-      baseDir: path.server + '/' + bases.dist
-    };
-  }
-  browserSync(opts);
-});
-
-// compile scss
-gulp.task('scss', function() {
-  return gulp.src([bases.src + '/' + path.scss + '/*.scss', bases.src + '/' + path.scss + '/pages/*.scss'])
+gulp.task('styles', function() {
+  return gulp.src([bases.src + '/' + path.scss + '/*.scss'])
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
     .pipe($.sass().on('error', $.sass.logError))
@@ -111,7 +91,6 @@ gulp.task('scss', function() {
 // Minify css
 gulp.task('min-css', function() {
   return gulp.src([
-    bases.src + '/' + path.css + '/vendor/bootstrap.css',
     bases.src + '/' + path.css + '/main.css'
   ])
     .pipe($.plumber())
@@ -170,10 +149,9 @@ gulp.task('watch', function() {
   }
   browserSync(opts)
 
-  gulp.watch([bases.src + '/' + path.scss + '/**/*'], gulp.series('fonts', 'bootstrap', 'styles'))
-  //gulp.watch([bases.src + 'scripts/**/*'], ['jshint', 'scripts'])
+  gulp.watch([bases.src + '/' + path.scss + '/**/*'], gulp.series('styles'))
   return $.watch(path.refresh, reload);
 })
 
 gulp.task('default', gulp.series('watch', function() {}))
-gulp.task('prod', gulp.series('clean', gulp.parallel('fonts', 'bootstrap') , 'styles' , 'copy', gulp.parallel('min-css', 'min-js'), 'images'))
+gulp.task('prod', gulp.series('clean', 'styles' , 'copy', gulp.parallel('min-css', 'min-js'), 'images'))
