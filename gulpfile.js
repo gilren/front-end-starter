@@ -110,7 +110,7 @@ gulp.task('styles', function() {
 // Minify css
 gulp.task('min-css', function() {
   return gulp.src([
-    bases.src + '/' + path.css + '/vendor/bootstrap.css',
+    bases.src + '/' + path.css + '/vendor/**.css',
     bases.src + '/' + path.css + '/main.css'
   ])
     .pipe($.plumber())
@@ -127,7 +127,7 @@ gulp.task('min-css', function() {
 // Minify js
 gulp.task('min-js', function() {
   return gulp.src([
-  //bases.src + '/' + path.js + '/lib/test.js',
+    bases.src + '/' + path.js + '/vendor/**.js',
     bases.src + '/' + path.js + '/main.js'
   ])
     .pipe($.plumber())

@@ -1,4 +1,4 @@
-scss_files: 'assets/css/scss/*.scss'
+scss_files: 'assets/scss/*.scss'
 
 linters:
   Comment:

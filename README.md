@@ -40,9 +40,13 @@ $ gulp clean
 $ gulp copy
 </pre>
 
+##### - Bootstrap override
+
+Use the file located in src/vendor/partials/_variable_bootstrap.scss to override the bootstrap variables
+
 ### TODOS
 - [x] Min css
 - [x] Min js
-- [x] Min images
+- [ ] Min images
 - [ ] Svgsprite
-
+- [ ] Bootstrap grid changes explanation

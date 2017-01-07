@@ -1,10 +1,82 @@
 # ----------------------------------------------------------------------
+# | Cross-origin web fonts                                             |
+# ----------------------------------------------------------------------
+
+<IfModule mod_headers.c>
+    <FilesMatch "\.(eot|otf|tt[cf]|woff2?)$">
+        Header set Access-Control-Allow-Origin "*"
+    </FilesMatch>
+</IfModule>
+
+# ----------------------------------------------------------------------
+# | Media types                                                        |
+# ----------------------------------------------------------------------
+
+<IfModule mod_mime.c>
+
+  # Data interchange
+
+    AddType application/atom+xml                        atom
+    AddType application/json                            json map topojson
+    AddType application/ld+json                         jsonld
+    AddType application/rss+xml                         rss
+    AddType application/vnd.geo+json                    geojson
+    AddType application/xml                             rdf xml
+
+  # JavaScript
+
+    AddType application/javascript                      js
+
+  # Manifest files
+
+    AddType application/manifest+json                   webmanifest
+    AddType application/x-web-app-manifest+json         webapp
+    AddType text/cache-manifest                         appcache
+
+  # Media files
+
+    AddType audio/mp4                                   f4a f4b m4a
+    AddType audio/ogg                                   oga ogg opus
+    AddType image/bmp                                   bmp
+    AddType image/svg+xml                               svg svgz
+    AddType image/webp                                  webp
+    AddType video/mp4                                   f4v f4p m4v mp4
+    AddType video/ogg                                   ogv
+    AddType video/webm                                  webm
+    AddType video/x-flv                                 flv
+
+    AddType image/x-icon                                cur ico
+
+  # Web fonts
+
+    AddType application/font-woff                       woff
+    AddType application/font-woff2                      woff2
+    AddType application/vnd.ms-fontobject               eot
+
+    AddType application/x-font-ttf                      ttc ttf
+    AddType font/opentype                               otf
+
+  # Other
+
+    AddType application/octet-stream                    safariextz
+    AddType application/x-bb-appworld                   bbaw
+    AddType application/x-chrome-extension              crx
+    AddType application/x-opera-extension               oex
+    AddType application/x-xpinstall                     xpi
+    AddType text/vcard                                  vcard vcf
+    AddType text/vnd.rim.location.xloc                  xloc
+    AddType text/vtt                                    vtt
+    AddType text/x-component                            htc
+
+</IfModule>
+
+# ----------------------------------------------------------------------
 # | Character encodings                                                |
 # ----------------------------------------------------------------------
 
 AddDefaultCharset utf-8
 
-# Serve the following file types with the media type `charset`
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 <IfModule mod_mime.c>
     AddCharset utf-8 .atom \
@@ -25,13 +97,15 @@ AddDefaultCharset utf-8
                      .xml
 </IfModule>
 
+# ######################################################################
+# # WEB PERFORMANCE                                                    #
+# ######################################################################
+
 # ----------------------------------------------------------------------
 # | Compression                                                        |
 # ----------------------------------------------------------------------
 
 <IfModule mod_deflate.c>
-
-    # Force compression for mangled `Accept-Encoding` request headers
 
     <IfModule mod_setenvif.c>
         <IfModule mod_headers.c>
@@ -39,8 +113,6 @@ AddDefaultCharset utf-8
             RequestHeader append Accept-Encoding "gzip,deflate" env=HAVE_Accept-Encoding
         </IfModule>
     </IfModule>
-
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     <IfModule mod_filter.c>
         AddOutputFilterByType DEFLATE "application/atom+xml" \
@@ -77,7 +149,9 @@ AddDefaultCharset utf-8
                                       "text/xml"
 
     </IfModule>
+
+    <IfModule mod_mime.c>
+        AddEncoding gzip              svgz
+    </IfModule>
+
 </IfModule>
-
-
-
