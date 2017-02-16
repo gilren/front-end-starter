@@ -23,15 +23,18 @@
     AddType application/vnd.geo+json                    geojson
     AddType application/xml                             rdf xml
 
+
   # JavaScript
 
     AddType application/javascript                      js
+
 
   # Manifest files
 
     AddType application/manifest+json                   webmanifest
     AddType application/x-web-app-manifest+json         webapp
     AddType text/cache-manifest                         appcache
+
 
   # Media files
 
@@ -44,17 +47,17 @@
     AddType video/ogg                                   ogv
     AddType video/webm                                  webm
     AddType video/x-flv                                 flv
-
     AddType image/x-icon                                cur ico
+
 
   # Web fonts
 
     AddType application/font-woff                       woff
     AddType application/font-woff2                      woff2
     AddType application/vnd.ms-fontobject               eot
-
     AddType application/x-font-ttf                      ttc ttf
     AddType font/opentype                               otf
+
 
   # Other
 
@@ -70,13 +73,8 @@
 
 </IfModule>
 
-# ----------------------------------------------------------------------
-# | Character encodings                                                |
-# ----------------------------------------------------------------------
-
 AddDefaultCharset utf-8
 
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 <IfModule mod_mime.c>
     AddCharset utf-8 .atom \
@@ -149,6 +147,8 @@ AddDefaultCharset utf-8
                                       "text/xml"
 
     </IfModule>
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     <IfModule mod_mime.c>
         AddEncoding gzip              svgz

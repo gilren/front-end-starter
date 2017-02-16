@@ -34,19 +34,18 @@ $ git commit -m "Initial commit"
 <pre>
 $ gulp
 $ gulp prod
-$ gulp min
+$ gulp prod --min true  
+$ gulp min-css
 $ gulp min-js
 $ gulp clean
 $ gulp copy
 </pre>
 
-##### - Bootstrap override
-
-Use the file located in src/vendor/partials/_variable_bootstrap.scss to override the bootstrap variables
-
 ### TODOS
 - [x] Min css
 - [x] Min js
-- [ ] Min images
+- [x] Min images
 - [ ] Svgsprite
-- [ ] Bootstrap grid changes explanation
+
+##### - Bootstrap override  
+Use the file located in src/vendor/partials/_variable_bootstrap.scss to override the bootstrap variables

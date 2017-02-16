@@ -1,11 +1,11 @@
-var bases, path, minify, path, opts, images_options, browser_support, gulp, $, browserSync, del, reload
+var min, bases, path, minify, path, opts, images_options, browser_support, gulp, $, browserSync, del, reload
 
 /* ========================================================================
  *
  * Configuration
  * ======================================================================== */
 
-minify = true
+min = true
 
 bases = {
   src: 'src',
@@ -26,7 +26,8 @@ path = {
 
 opts = {
   notify: false,
-  open: true
+  open: true,
+  files: [bases.src + '/' + path.refresh]
 }
 
 images_options = {
@@ -110,32 +111,32 @@ gulp.task('styles', function() {
 // Minify css
 gulp.task('min-css', function() {
   return gulp.src([
-    bases.src + '/' + path.css + '/vendor/**.css',
+    bases.src + '/' + path.css + '/vendor/bootstrap.css',
     bases.src + '/' + path.css + '/main.css'
   ])
     .pipe($.plumber())
     .pipe($.concat('main.css'))
     .pipe(gulp.dest(bases.dist + '/' + path.css + '/'))
-    .pipe($.rename('all.min.css'))
-    .pipe(minify ? $.cssnano({
+    .pipe($.if(min, $.rename('all.min.css')))
+    .pipe($.if(min, $.cssnano({
       discardComments: {removeAll: true}
-    }) : {})
-    .pipe(gulp.dest(bases.dist + '/' + path.css + '/'))
+    })))
+    .pipe($.if(min, gulp.dest(bases.dist + '/' + path.css + '/')))
     .pipe($.size())
 })
 
 // Minify js
 gulp.task('min-js', function() {
   return gulp.src([
-    bases.src + '/' + path.js + '/vendor/**.js',
+  //bases.src + '/' + path.js + '/lib/YOURJS.js',
     bases.src + '/' + path.js + '/main.js'
   ])
     .pipe($.plumber())
     .pipe($.concat('main.js'))
     .pipe(gulp.dest(bases.dist + '/' + path.js + '/'))
-    .pipe($.rename('all.min.js'))
-    .pipe($.uglify({preserveComments: 'none'}))
-    .pipe(gulp.dest(bases.dist + '/' + path.js + '/'))
+    .pipe($.if(min, $.rename('all.min.js')))
+    .pipe($.if(min, $.uglify({preserveComments: 'none'})))
+    .pipe($.if(min, gulp.dest(bases.dist + '/' + path.js + '/')))
     .pipe($.size())
 })
 
