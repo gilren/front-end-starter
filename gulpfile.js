@@ -1,11 +1,11 @@
-var bases, path, minify, path, opts, images_options, browser_support, gulp, $, browserSync, del, reload
+var min, bases, path, minify, path, opts, images_options, browser_support, gulp, $, browserSync, del, reload
 
 /* ========================================================================
  *
  * Configuration
  * ======================================================================== */
 
-minify = true
+min = true
 
 bases = {
   src: 'src',
@@ -14,7 +14,7 @@ bases = {
 
 path = {
   //proxy: 'local.dev/my/server/lol',
-  bootstrap_sass: './bower_components/bootstrap-sass',
+  bootstrap_sass: 'assets/scss/vendors/bootstrap-3',
   server: './',
   img: 'assets/img',
   scss: 'assets/scss',
@@ -26,7 +26,8 @@ path = {
 
 opts = {
   notify: false,
-  open: true
+  open: true,
+  files: [bases.src + '/' + path.refresh]
 }
 
 images_options = {
@@ -37,7 +38,7 @@ images_options = {
   }
 }
 
-browser_support = ['ie >= 9', 'last 3 versions']
+browser_support = ['ie >= 10', 'last 3 versions']
 
 gulp = require('gulp')
 $ = require('gulp-load-plugins')()
@@ -51,6 +52,7 @@ reload = browserSync.reload
  * Available tasks:
  *   `gulp`
  *   `gulp prod`
+ *    gulp bootstrap`
  *   `gulp min-css`
  *   `gulp min-js`
  *   `gulp clean`
@@ -79,12 +81,11 @@ gulp.task('fonts', function() {
 
 // make a bootstrap file
 gulp.task('bootstrap', function() {
-  return gulp.src(bases.src + '/' + path.scss + '/vendor/*.scss')
+  return gulp.src(bases.src + '/' + path.bootstrap_sass + '/**/*.scss')
     .pipe($.plumber())
-    .pipe($.sass({
-      includePaths: [path.bootstrap_sass + '/assets/stylesheets']
-    }).on('error', $.sass.logError))
-    .pipe($.rename('bootstrap.css'))
+    .pipe($.sourcemaps.init())
+    .pipe($.sass().on('error', $.sass.logError))
+    .pipe($.sourcemaps.write('./'))
     .pipe(gulp.dest(bases.src + '/' + path.css + '/vendor'))
     .pipe($.size())
 })
@@ -110,32 +111,32 @@ gulp.task('styles', function() {
 // Minify css
 gulp.task('min-css', function() {
   return gulp.src([
-    bases.src + '/' + path.css + '/vendor/**.css',
+    bases.src + '/' + path.css + '/vendors/bootstrap.css',
     bases.src + '/' + path.css + '/main.css'
   ])
     .pipe($.plumber())
     .pipe($.concat('main.css'))
     .pipe(gulp.dest(bases.dist + '/' + path.css + '/'))
-    .pipe($.rename('all.min.css'))
-    .pipe(minify ? $.cssnano({
+    .pipe($.if(min, $.rename('all.min.css')))
+    .pipe($.if(min, $.cssnano({
       discardComments: {removeAll: true}
-    }) : {})
-    .pipe(gulp.dest(bases.dist + '/' + path.css + '/'))
+    })))
+    .pipe($.if(min, gulp.dest(bases.dist + '/' + path.css + '/')))
     .pipe($.size())
 })
 
 // Minify js
 gulp.task('min-js', function() {
   return gulp.src([
-    bases.src + '/' + path.js + '/vendor/**.js',
+  //bases.src + '/' + path.js + '/lib/YOURJS.js',
     bases.src + '/' + path.js + '/main.js'
   ])
     .pipe($.plumber())
     .pipe($.concat('main.js'))
     .pipe(gulp.dest(bases.dist + '/' + path.js + '/'))
-    .pipe($.rename('all.min.js'))
-    .pipe($.uglify({preserveComments: 'none'}))
-    .pipe(gulp.dest(bases.dist + '/' + path.js + '/'))
+    .pipe($.if(min, $.rename('all.min.js')))
+    .pipe($.if(min, $.uglify({preserveComments: 'none'})))
+    .pipe($.if(min, gulp.dest(bases.dist + '/' + path.js + '/')))
     .pipe($.size())
 })
 
@@ -169,7 +170,7 @@ gulp.task('watch', function() {
   }
   browserSync(opts)
 
-  gulp.watch([bases.src + '/' + path.scss + '/**/*'], gulp.series('fonts', 'bootstrap', 'styles'))
+  gulp.watch([bases.src + '/' + path.scss + '/**/*.scss'], gulp.series('fonts', 'bootstrap', 'styles'))
   return $.watch(path.refresh, reload);
 })
 

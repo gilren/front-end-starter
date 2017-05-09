@@ -4,3 +4,6 @@ bower_components
 .idea
 dist/
 src/assets/css/
+\.gitconfig
+
+\.vscode/settings\.json
