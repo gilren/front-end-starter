@@ -5,3 +5,5 @@ bower_components
 dist/
 src/assets/css/
 \.gitconfig
+
+\.vscode/settings\.json

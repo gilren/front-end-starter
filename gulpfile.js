@@ -14,7 +14,7 @@ bases = {
 
 path = {
   //proxy: 'local.dev/my/server/lol',
-  bootstrap_sass: './bower_components/bootstrap-sass',
+  bootstrap_sass: 'assets/scss/vendors/bootstrap-3',
   server: './',
   img: 'assets/img',
   scss: 'assets/scss',
@@ -38,7 +38,7 @@ images_options = {
   }
 }
 
-browser_support = ['ie >= 9', 'last 3 versions']
+browser_support = ['ie >= 10', 'last 3 versions']
 
 gulp = require('gulp')
 $ = require('gulp-load-plugins')()
@@ -52,6 +52,7 @@ reload = browserSync.reload
  * Available tasks:
  *   `gulp`
  *   `gulp prod`
+ *    gulp bootstrap`
  *   `gulp min-css`
  *   `gulp min-js`
  *   `gulp clean`
@@ -80,12 +81,11 @@ gulp.task('fonts', function() {
 
 // make a bootstrap file
 gulp.task('bootstrap', function() {
-  return gulp.src(bases.src + '/' + path.scss + '/vendor/*.scss')
+  return gulp.src(bases.src + '/' + path.bootstrap_sass + '/**/*.scss')
     .pipe($.plumber())
-    .pipe($.sass({
-      includePaths: [path.bootstrap_sass + '/assets/stylesheets']
-    }).on('error', $.sass.logError))
-    .pipe($.rename('bootstrap.css'))
+    .pipe($.sourcemaps.init())
+    .pipe($.sass().on('error', $.sass.logError))
+    .pipe($.sourcemaps.write('./'))
     .pipe(gulp.dest(bases.src + '/' + path.css + '/vendor'))
     .pipe($.size())
 })
@@ -111,7 +111,7 @@ gulp.task('styles', function() {
 // Minify css
 gulp.task('min-css', function() {
   return gulp.src([
-    bases.src + '/' + path.css + '/vendor/bootstrap.css',
+    bases.src + '/' + path.css + '/vendors/bootstrap.css',
     bases.src + '/' + path.css + '/main.css'
   ])
     .pipe($.plumber())
@@ -170,7 +170,7 @@ gulp.task('watch', function() {
   }
   browserSync(opts)
 
-  gulp.watch([bases.src + '/' + path.scss + '/**/*'], gulp.series('fonts', 'bootstrap', 'styles'))
+  gulp.watch([bases.src + '/' + path.scss + '/**/*.scss'], gulp.series('fonts', 'bootstrap', 'styles'))
   return $.watch(path.refresh, reload);
 })
 
