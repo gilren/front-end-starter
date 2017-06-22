@@ -10,13 +10,8 @@ $ npm install --global gulp-cli
 <pre>
 $ git clone https://github.com/gilren/front-end-starter.git project name
 $ cd project name
-$ npm install
+$ yarn
 $ gulp
-</pre>
-
-#### - Make a prod version
-<pre>
-$ gulp prod
 </pre>
 
 ##### - (Optional) Remove git history
@@ -32,14 +27,10 @@ $ git commit -m "Initial commit"
 <pre>
 $ gulp
 $ gulp prod
-$ gulp prod --min true
-$ gulp min-css
-$ gulp min-js
 $ gulp clean
 $ gulp copy
 </pre>
 
-### TODOS
-- [ ] Svgsprite
+
 
 
