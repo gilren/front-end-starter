@@ -1,9 +1,6 @@
 node_modules
 npm-debug.log
-bower_components
+dist
+public
 .idea
-dist/
-src/assets/css/
-\.gitconfig
-
-\.vscode/settings\.json
+npm-debug*

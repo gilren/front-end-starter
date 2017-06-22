@@ -1,4 +1,4 @@
-var min, bases, path, minify, path, opts, images_options, browser_support, gulp, $, browserSync, del, reload
+var min, bases, path, opts, imagesOptions, browserSupport, gulp, $, browserSync, del, reload
 
 /* ========================================================================
  *
@@ -13,8 +13,8 @@ bases = {
 }
 
 path = {
-  //proxy: 'local.dev/my/server/lol',
-  bootstrap_sass: 'assets/scss/vendors/bootstrap-3',
+  // proxy: 'local.dev/my/server/lol',
+  bootstrap_sass: 'assets/scss/vendor/bootstrap-3',
   server: './',
   img: 'assets/img',
   scss: 'assets/scss',
@@ -30,7 +30,7 @@ opts = {
   files: [bases.src + '/' + path.refresh]
 }
 
-images_options = {
+imagesOptions = {
   imageMin: {
     optimizationLevel: 3,
     progressive: true,
@@ -38,7 +38,7 @@ images_options = {
   }
 }
 
-browser_support = ['ie >= 10', 'last 3 versions']
+browserSupport = ['ie >= 11', 'last 2 versions']
 
 gulp = require('gulp')
 $ = require('gulp-load-plugins')()
@@ -51,36 +51,25 @@ reload = browserSync.reload
  * Tasks
  * Available tasks:
  *   `gulp`
+ *   `gulp min`
  *   `gulp prod`
- *    gulp bootstrap`
- *   `gulp min-css`
- *   `gulp min-js`
+ *   `gulp bootstrap`
  *   `gulp clean`
- *   `gulp copy`
  * ======================================================================== */
 
-
 // images
-gulp.task('images', function() {
+gulp.task('images', function () {
   return gulp.src([
-    bases.src + '/' + path.img + '/**/*',
-    '!' + bases.src + '/' + path.img + 'vectors/**/*'])
+    bases.src + '/' + path.img + '/**/*'])
     .pipe($.plumber())
     .pipe($.changed(bases.dist + '/' + path.img))
-    .pipe($.imagemin(images_options))
+    .pipe($.imagemin(imagesOptions))
     .pipe(gulp.dest(bases.dist + '/' + path.img + '/'))
     .pipe($.size())
 })
 
-// copy bootstrap required fonts
-gulp.task('fonts', function() {
-  return gulp.src(path.bootstrap_sass + '/assets/fonts/**/*')
-    .pipe(gulp.dest(bases.src + '/' + path.fonts))
-    .pipe($.size())
-})
-
 // make a bootstrap file
-gulp.task('bootstrap', function() {
+gulp.task('bootstrap', function () {
   return gulp.src(bases.src + '/' + path.bootstrap_sass + '/**/*.scss')
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
@@ -91,13 +80,13 @@ gulp.task('bootstrap', function() {
 })
 
 // compile scss
-gulp.task('styles', function() {
+gulp.task('styles', function () {
   return gulp.src([bases.src + '/' + path.scss + '/*.scss'])
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
     .pipe($.sass().on('error', $.sass.logError))
     .pipe($.autoprefixer({
-      browsers: browser_support
+      browsers: browserSupport
     }))
     .pipe($.combineMq())
     .pipe($.sourcemaps.write('./'))
@@ -109,9 +98,9 @@ gulp.task('styles', function() {
 })
 
 // Minify css
-gulp.task('min-css', function() {
+gulp.task('min-css', function () {
   return gulp.src([
-    bases.src + '/' + path.css + '/vendors/bootstrap.css',
+    bases.src + '/' + path.css + '/vendor/bootstrap.css',
     bases.src + '/' + path.css + '/main.css'
   ])
     .pipe($.plumber())
@@ -126,9 +115,9 @@ gulp.task('min-css', function() {
 })
 
 // Minify js
-gulp.task('min-js', function() {
+gulp.task('min-js', function () {
   return gulp.src([
-  //bases.src + '/' + path.js + '/lib/YOURJS.js',
+  // bases.src + '/' + path.js + '/lib/YOURJS.js',
     bases.src + '/' + path.js + '/main.js'
   ])
     .pipe($.plumber())
@@ -141,12 +130,12 @@ gulp.task('min-js', function() {
 })
 
 // Clean folder dist
-gulp.task('clean', function() {
+gulp.task('clean', function () {
   return del([bases.dist])
 })
 
 // Copy files into dist
-gulp.task('copy', function() {
+gulp.task('copy', function () {
   return gulp.src([
     bases.src + '/**',
     '!' + bases.src + '/' + path.js,
@@ -160,7 +149,7 @@ gulp.task('copy', function() {
   .pipe($.size())
 })
 
-gulp.task('watch', function() {
+gulp.task('watch', function () {
   if (path.proxy) {
     opts.proxy = path.proxy
   } else {
@@ -170,9 +159,9 @@ gulp.task('watch', function() {
   }
   browserSync(opts)
 
-  gulp.watch([bases.src + '/' + path.scss + '/**/*.scss'], gulp.series('fonts', 'bootstrap', 'styles'))
-  return $.watch(path.refresh, reload);
+  gulp.watch([bases.src + '/' + path.scss + '/**/*.scss'], gulp.series('bootstrap', 'styles'))
+  return $.watch(path.refresh, reload)
 })
 
-gulp.task('default', gulp.series('watch', function() {}))
-gulp.task('prod', gulp.series('clean', gulp.parallel('fonts', 'bootstrap') , 'styles' , 'copy', gulp.parallel('min-css', 'min-js'), 'images'))
+gulp.task('default', gulp.series('watch', function () {}))
+gulp.task('prod', gulp.series('clean', 'bootstrap', 'styles', 'copy', gulp.parallel('min-css', 'min-js'), 'images'))
