@@ -1,13 +1,16 @@
 @import 'base/variables';
-@import 'base/typography';
-@import 'base/colors';
-@import 'base/grid';
 @import 'base/mixins';
+@import 'base/colors';
+@import 'base/typography';
+@import 'base/grid';
+
 @import 'vendors/swiper';
 @import 'components/navigation';
 @import 'components/hero';
 @import 'components/buttons';
 @import 'components/gallery';
+
+@import 'layout/utils';
 @import 'layout/header';
 @import 'layout/sidebar';
 @import 'layout/footer';
