@@ -32,5 +32,7 @@ $ gulp copy
 </pre>
 
 
-
+#### - TO DO
+Add google material animations
+https://material.io/guidelines/motion/duration-easing.html
 
