@@ -1,0 +1,24 @@
+// Used by growing and shrinking material
+// ease in out
+@mixin t-standard($element: 'all', $length: 200ms) {
+  transition: unquote($element) $length cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+// Used by elements who enter the screen at full velocity and slowly decelerate to a resting point.
+// ease out
+@mixin t-deceleration($element: 'all', $length: 200ms) {
+  transition: unquote($element) $length cubic-bezier(0.0, 0.0, 0.2, 1);
+}
+
+// Usedelements leave the screen at full velocity
+// ease in
+@mixin t-acceleration($element: 'all', $length: 200ms) {
+  transition: unquote($element) $length cubic-bezier(0.4, 0.0, 1, 1);
+}
+
+// It is used by exiting elements that may return to the screen at any time.
+// ease in out
+@mixin t-sharp($element: 'all', $length: 200ms) {
+  transition: unquote($element) $length cubic-bezier(0.4, 0.0, 0.6, 1);
+}
+

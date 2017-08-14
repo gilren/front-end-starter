@@ -738,6 +738,12 @@ button.swiper-pagination-bullet {
   height: 300px;
 }
 
+@media (min-width: 1024px) {
+  .no-padding {
+    padding: 0;
+  }
+}
+
 @-webkit-keyframes swiper-preloader-spin {
   100% {
     -webkit-transform: rotate(360deg);
