@@ -1,18 +1,40 @@
-@import 'base/variables';
-@import 'base/mixins';
-@import 'base/colors';
-@import 'base/typography';
+$font-body: Helvetica, Arial, sans-serif;
+$font-title: Helvetica, Arial, sans-serif;
+$font-size: 14px;
 
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: $font-body;
+  font-size: 1rem;
+}
+
+/* Mixins
+  ========================================================================== */
+@import 'base/mixins';
+
+/* Libs
+  ========================================================================== */
 @import 'vendor/swiper';
+
+/* Generic
+  ========================================================================== */
+@import 'layout/utils';
+@import 'layout/header';
+@import 'layout/sidebar';
+@import 'layout/footer';
+
+/* Tools
+  ========================================================================== */
 @import 'components/navigation';
 @import 'components/hero';
 @import 'components/buttons';
 @import 'components/gallery';
 
-@import 'layout/utils';
-@import 'layout/header';
-@import 'layout/sidebar';
-@import 'layout/footer';
-@import 'pages/contact';
+/* Pages
+  ========================================================================== */
 @import 'pages/home';
 @import 'pages/page';
+@import 'pages/contact';

@@ -57,18 +57,7 @@ reload = browserSync.reload
  *   `gulp clean`
  * ======================================================================== */
 
-// images
-gulp.task('images', function () {
-  return gulp.src([
-    bases.src + '/' + path.img + '/**/*'])
-    .pipe($.plumber())
-    .pipe($.changed(bases.dist + '/' + path.img))
-    .pipe($.imagemin(imagesOptions))
-    .pipe(gulp.dest(bases.dist + '/' + path.img + '/'))
-    .pipe($.size())
-})
-
-// make a bootstrap file
+ // make a bootstrap file
 gulp.task('bootstrap', function () {
   return gulp.src(bases.src + '/' + path.bootstrap_sass + '/**/*.scss')
     .pipe($.plumber())
@@ -76,12 +65,11 @@ gulp.task('bootstrap', function () {
     .pipe($.sass().on('error', $.sass.logError))
     .pipe($.sourcemaps.write('./'))
     .pipe(gulp.dest(bases.src + '/' + path.css + '/vendor'))
-    .pipe($.size())
 })
 
 // compile scss
 gulp.task('styles', function () {
-  return gulp.src([bases.src + '/' + path.scss + '/*.scss'])
+  return gulp.src(bases.src + '/' + path.scss + '/*.scss')
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
     .pipe($.sass().on('error', $.sass.logError))
@@ -91,7 +79,6 @@ gulp.task('styles', function () {
     .pipe($.combineMq())
     .pipe($.sourcemaps.write('./'))
     .pipe(gulp.dest(bases.src + '/' + path.css + '/'))
-    .pipe($.size())
     .pipe(reload({
       stream: true
     }))
@@ -111,7 +98,6 @@ gulp.task('min-css', function () {
       discardComments: {removeAll: true}
     })))
     .pipe($.if(min, gulp.dest(bases.dist + '/' + path.css + '/')))
-    .pipe($.size())
 })
 
 // Minify js
@@ -126,7 +112,15 @@ gulp.task('min-js', function () {
     .pipe($.if(min, $.rename('all.min.js')))
     .pipe($.if(min, $.uglify({preserveComments: 'none'})))
     .pipe($.if(min, gulp.dest(bases.dist + '/' + path.js + '/')))
-    .pipe($.size())
+})
+
+// minify images
+gulp.task('images', function () {
+  return gulp.src([bases.src + '/' + path.img + '/**/*'])
+    .pipe($.plumber())
+    .pipe($.changed(bases.dist + '/' + path.img))
+    .pipe($.imagemin(imagesOptions))
+    .pipe(gulp.dest(bases.dist + '/' + path.img + '/'))
 })
 
 // Clean folder dist
@@ -146,7 +140,6 @@ gulp.task('copy', function () {
     '!' + bases.src + '/' + path.css + '/**'])
   .pipe($.plumber())
   .pipe(gulp.dest(bases.dist))
-  .pipe($.size())
 })
 
 gulp.task('watch', function () {
