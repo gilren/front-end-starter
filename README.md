@@ -11,7 +11,6 @@ $ npm install --global gulp-cli
 $ git clone https://github.com/gilren/front-end-starter.git project name
 $ cd project name
 $ yarn
-$ gulp copy-bootstrap
 $ gulp
 </pre>
 
@@ -27,7 +26,6 @@ $ git commit -m "Initial commit"
 ##### - Available tasks
 <pre>
 $ gulp
-$ gulp copy-bootstrap
 $ gulp prod
 $ gulp clean
 $ gulp copy
