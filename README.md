@@ -1,4 +1,4 @@
-# Front end boilerplate
+# Front end boilerplate - Bootstrap 4
 
 ### Installation
 You need Gulp installed globally:
@@ -11,6 +11,7 @@ $ npm install --global gulp-cli
 $ git clone https://github.com/gilren/front-end-starter.git project name
 $ cd project name
 $ yarn
+$ gulp copy-bootstrap
 $ gulp
 </pre>
 
@@ -26,13 +27,8 @@ $ git commit -m "Initial commit"
 ##### - Available tasks
 <pre>
 $ gulp
+$ gulp copy-bootstrap
 $ gulp prod
 $ gulp clean
 $ gulp copy
 </pre>
-
-
-#### - TO DO
-Add google material animations
-https://material.io/guidelines/motion/duration-easing.html
-

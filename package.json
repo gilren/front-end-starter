@@ -1,6 +1,6 @@
 {
   "name": "front-end-starter",
-  "version": "2.0",
+  "version": "3.0",
   "description": "General front-end project boilerplate",
   "main": "main.js",
   "scripts": {
@@ -20,6 +20,7 @@
     "babel-eslint": "^7.2.3",
     "babel-loader": "^6.2.10",
     "babel-preset-env": "^1.1.8",
+    "bootstrap": "^4.0.0-beta",
     "browser-sync": "^2.11.2",
     "del": "^2.2.0",
     "eslint": "^3.13.1",
