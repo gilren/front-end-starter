@@ -8,12 +8,21 @@ var min,
   $,
   browserSync,
   del,
+  attrsSorter,
+  posthtmlConfig,
   reload
 
 /* ========================================================================
  *
  * Configuration
  * ======================================================================== */
+
+gulp = require('gulp')
+$ = require('gulp-load-plugins')()
+browserSync = require('browser-sync')
+attrsSorter = require('posthtml-attrs-sorter')
+del = require('del')
+reload = browserSync.reload
 
 min = true
 
@@ -53,13 +62,31 @@ imagesOptions = {
   }
 }
 
-browserSupport = ['ie >= 11', 'last 2 versions']
+posthtmlConfig = {
+  plugins: [
+    attrsSorter({
+      order: [
+        'class',
+        'id',
+        'name',
+        'data',
+        'ng',
+        'src',
+        'for',
+        'type',
+        'href',
+        'values',
+        'title',
+        'alt',
+        'role',
+        'aria'
+      ]
+    })
+  ],
+  options: {}
+}
 
-gulp = require('gulp')
-$ = require('gulp-load-plugins')()
-browserSync = require('browser-sync')
-del = require('del')
-reload = browserSync.reload
+browserSupport = ['ie >= 11', 'last 2 versions']
 
 /* ========================================================================
  *
@@ -72,6 +99,15 @@ reload = browserSync.reload
  *   `gulp bootstrap`
  *   `gulp clean`
  * ======================================================================== */
+
+// clean html
+gulp.task('html', function () {
+  return gulp
+    .src(bases.src + '/' + '**/*.html')
+    .pipe($.plumber())
+    .pipe($.posthtml(posthtmlConfig.plugins, posthtmlConfig.options))
+    .pipe(gulp.dest(bases.src))
+})
 
 // make a bootstrap file
 gulp.task('bootstrap', function () {
@@ -200,13 +236,14 @@ gulp.task('watch', function () {
   return $.watch(path.refresh, reload)
 })
 
-gulp.task('default', gulp.series('watch', function () {}))
+gulp.task('default', gulp.series('html', 'watch', function () {}))
 gulp.task(
   'prod',
   gulp.series(
     'clean',
     'bootstrap',
     'styles',
+    'html',
     'copy',
     gulp.parallel('min-css', 'min-js'),
     'images'

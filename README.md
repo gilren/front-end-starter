@@ -14,15 +14,6 @@ $ yarn
 $ gulp
 </pre>
 
-##### - (Optional) Remove git history
-<pre>
-$ cd project name
-$ rm -rf .git
-$ git init
-$ git add .
-$ git commit -m "Initial commit"
-</pre>
-
 ##### - Available tasks
 <pre>
 $ gulp
@@ -30,3 +21,6 @@ $ gulp prod
 $ gulp clean
 $ gulp copy
 </pre>
+
+### Swiper
+Full swiper scss : https://gist.github.com/gilren/de76d45adb23198a833a45e607d43915
