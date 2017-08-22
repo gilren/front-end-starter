@@ -3,4 +3,5 @@ npm-debug.log
 dist
 public
 .idea
+.gitconfig
 npm-debug*
