@@ -207,13 +207,9 @@ gulp.task('clean', function () {
 gulp.task('copy', function () {
   return gulp
     .src([
-      bases.src + '/**',
-      '!' + bases.src + '/' + path.js,
-      '!' + bases.src + '/' + path.js + '/**',
-      '!' + bases.src + '/' + path.scss,
-      '!' + bases.src + '/' + path.scss + '/**',
-      '!' + bases.src + '/' + path.css,
-      '!' + bases.src + '/' + path.css + '/**'
+      bases.src + '/**/*.html',
+      bases.src + '/favicon.ico',
+      bases.src + '/robots.txt'
     ])
     .pipe($.plumber())
     .pipe(gulp.dest(bases.dist))
