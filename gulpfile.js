@@ -33,7 +33,6 @@ bases = {
 
 path = {
   // proxy: 'local.dev/my/server/lol',
-  bootstrap_vendor: 'node_modules/bootstrap/scss',
   bootstrap_sass: 'assets/scss/vendor/bootstrap',
   server: './',
   img: 'assets/img',
