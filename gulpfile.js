@@ -119,6 +119,55 @@ gulp.task('bootstrap', function () {
     .pipe(gulp.dest(bases.src + '/' + path.css + '/vendor'))
 })
 
+gulp.task('concat-variables', function () {
+  return gulp
+    .src([
+      bases.src + '/' + path.scss + '/base/_variables.scss',
+      bases.src + '/' + path.scss + '/base/_mixins.scss'
+    ])
+    .pipe($.plumber())
+    .pipe($.concat('_variables.scss'))
+    .pipe(gulp.dest(bases.src + '/' + path.scss + '/concat'))
+})
+
+gulp.task('concat-common', function () {
+  return gulp
+    .src([
+      bases.src + '/' + path.scss + '/base/_import.scss',
+      bases.src + '/' + path.scss + '/layout/_utils.scss',
+      bases.src + '/' + path.scss + '/layout/_header.scss',
+      bases.src + '/' + path.scss + '/layout/_sidebar.scss',
+      bases.src + '/' + path.scss + '/layout/_footer.scss',
+      bases.src + '/' + path.scss + '/components/*.scss'
+    ])
+    .pipe($.plumber())
+    .pipe($.concat('common.scss'))
+    .pipe(gulp.dest(bases.src + '/' + path.scss + '/concat'))
+})
+
+gulp.task('concat-page', function () {
+  return gulp
+    .src([
+      bases.src + '/' + path.scss + '/base/_import.scss',
+      bases.src + '/' + path.scss + '/pages/*.scss',
+      '!' + bases.src + '/' + path.scss + '/pages/_home.scss'
+    ])
+    .pipe($.plumber())
+    .pipe($.concat('page.scss'))
+    .pipe(gulp.dest(bases.src + '/' + path.scss + '/concat'))
+})
+
+gulp.task('concat-home', function () {
+  return gulp
+    .src([
+      bases.src + '/' + path.scss + '/base/_import.scss',
+      bases.src + '/' + path.scss + '/pages/_home.scss'
+    ])
+    .pipe($.plumber())
+    .pipe($.concat('home.scss'))
+    .pipe(gulp.dest(bases.src + '/' + path.scss + '/concat'))
+})
+
 // compile scss
 gulp.task('styles', function () {
   return gulp
@@ -233,14 +282,19 @@ gulp.task('watch', function () {
 
 gulp.task('default', gulp.series('html', 'watch', function () {}))
 gulp.task(
+  'concat',
+  gulp.series('concat-variables', 'concat-common', 'concat-home', 'concat-page')
+)
+gulp.task(
   'prod',
   gulp.series(
     'clean',
     'bootstrap',
     'styles',
     'html',
+    'concat',
     'copy',
-    gulp.parallel('min-css', 'min-js'),
+    // gulp.parallel('min-css', 'min-js'),
     'images'
   )
 )

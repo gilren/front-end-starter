@@ -20,6 +20,7 @@ $ gulp
 $ gulp prod
 $ gulp clean
 $ gulp copy
+$ gulp concat
 </pre>
 
 ### Swiper

@@ -2918,7 +2918,7 @@ gulp-combine-mq@^0.4.0:
     temp-write "^1.1.0"
     through2 "*"
 
-gulp-concat@^2.6.0:
+gulp-concat@^2.6.1:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/gulp-concat/-/gulp-concat-2.6.1.tgz#633d16c95d88504628ad02665663cee5a4793353"
   dependencies:
