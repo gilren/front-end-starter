@@ -283,7 +283,18 @@ gulp.task('watch', function () {
 gulp.task('default', gulp.series('html', 'watch', function () {}))
 gulp.task(
   'concat',
-  gulp.series('concat-variables', 'concat-common', 'concat-home', 'concat-page')
+  gulp.series(
+    'concat-variables',
+    'concat-common',
+    'concat-home',
+    'concat-page',
+    function () {
+      return gulp
+        .src(bases.src + '/koala-config.json')
+        .pipe($.plumber())
+        .pipe(gulp.dest(bases.src + '/' + path.scss + '/concat'))
+    }
+  )
 )
 gulp.task(
   'prod',
@@ -292,9 +303,8 @@ gulp.task(
     'bootstrap',
     'styles',
     'html',
-    'concat',
     'copy',
-    // gulp.parallel('min-css', 'min-js'),
+    gulp.parallel('min-css', 'min-js'),
     'images'
   )
 )
