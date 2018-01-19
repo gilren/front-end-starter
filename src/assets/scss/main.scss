@@ -1,37 +1,35 @@
 /* -----------------------------------------------------
    Variable
    ----------------------------------------------------- */
-@import 'base/variables';
+@import "base/variables";
 
 /* -----------------------------------------------------
    Mixins
    ----------------------------------------------------- */
-@import 'base/mixins';
+@import "base/mixins";
 
 /* -----------------------------------------------------
    Libs
    ----------------------------------------------------- */
-@import 'vendor/swiper';
+@import "vendor/swiper";
 
 /* -----------------------------------------------------
    Layout
    ----------------------------------------------------- */
-@import 'layout/utils';
-@import 'layout/header';
-@import 'layout/sidebar';
-@import 'layout/footer';
+@import "layout/utils";
+@import "layout/header";
+@import "layout/sidebar";
+@import "layout/footer";
 
 /* -----------------------------------------------------
    Components
    ----------------------------------------------------- */
-@import 'components/navigation';
-@import 'components/hero';
-@import 'components/buttons';
-@import 'components/gallery';
+@import "components/hero";
+@import "components/buttons";
 
 /* -----------------------------------------------------
    Pages
    ----------------------------------------------------- */
-@import 'pages/home';
-@import 'pages/page';
-@import 'pages/contact';
+@import "pages/home";
+@import "pages/page";
+@import "pages/contact";

@@ -10,12 +10,12 @@
   "license": "MIT",
   "dependencies": {
     "gulp": "github:gulpjs/gulp#4.0",
-    "gulp-autoprefixer": "*",
     "gulp-plumber": "*",
     "gulp-sass": "*",
     "gulp-sourcemaps": "*"
   },
   "devDependencies": {
+    "autoprefixer": "^7.2.5",
     "babel-core": "^6.21.0",
     "babel-eslint": "^7.2.3",
     "babel-loader": "^6.2.10",
@@ -38,6 +38,7 @@
     "gulp-if": "^2.0.1",
     "gulp-imagemin": "^2.3.0",
     "gulp-load-plugins": "^1.2.0",
+    "gulp-postcss": "^7.0.1",
     "gulp-posthtml": "^3.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^1.4.2",
