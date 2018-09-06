@@ -1,6 +1,6 @@
 {
   "name": "front-end-starter",
-  "version": "3.0",
+  "version": "4.0.0",
   "description": "General front-end project boilerplate",
   "main": "main.js",
   "scripts": {
@@ -10,17 +10,17 @@
   "license": "MIT",
   "dependencies": {
     "gulp": "github:gulpjs/gulp#4.0",
-    "gulp-autoprefixer": "*",
     "gulp-plumber": "*",
     "gulp-sass": "*",
     "gulp-sourcemaps": "*"
   },
   "devDependencies": {
+    "autoprefixer": "*",
     "babel-core": "^6.21.0",
     "babel-eslint": "^7.2.3",
     "babel-loader": "^6.2.10",
     "babel-preset-env": "^1.1.8",
-    "bootstrap": "^4.0.0-beta",
+    "bootstrap": "*",
     "browser-sync": "^2.11.2",
     "del": "^2.2.0",
     "eslint": "^3.13.1",
@@ -38,6 +38,7 @@
     "gulp-if": "^2.0.1",
     "gulp-imagemin": "^2.3.0",
     "gulp-load-plugins": "^1.2.0",
+    "gulp-postcss": "^8.0.0",
     "gulp-posthtml": "^3.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^1.4.2",

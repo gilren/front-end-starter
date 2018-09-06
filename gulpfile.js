@@ -7,6 +7,8 @@ var min,
   gulp,
   $,
   browserSync,
+  postcss,
+  autoprefixer,
   del,
   attrsSorter,
   posthtmlConfig,
@@ -20,6 +22,8 @@ var min,
 gulp = require('gulp')
 $ = require('gulp-load-plugins')()
 browserSync = require('browser-sync')
+postcss = require('gulp-postcss')
+autoprefixer = require('autoprefixer')
 attrsSorter = require('posthtml-attrs-sorter')
 del = require('del')
 reload = browserSync.reload
@@ -127,9 +131,11 @@ gulp.task('styles', function () {
     .pipe($.sourcemaps.init())
     .pipe($.sass().on('error', $.sass.logError))
     .pipe(
-      $.autoprefixer({
-        browsers: browserSupport
-      })
+      postcss([
+        autoprefixer({
+          browsers: browserSupport
+        })
+      ])
     )
     .pipe($.combineMq())
     .pipe($.sourcemaps.write('./'))
