@@ -9,7 +9,6 @@
   "author": "Renaud Gillet <renaud.gillet@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "gulp": "github:gulpjs/gulp#4.0",
     "gulp-plumber": "*",
     "gulp-sass": "*",
     "gulp-sourcemaps": "*"
