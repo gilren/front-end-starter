@@ -9,7 +9,6 @@
   "author": "Renaud Gillet <renaud.gillet@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "gulp": "github:gulpjs/gulp#4.0",
     "gulp-plumber": "*",
     "gulp-sass": "*",
     "gulp-sourcemaps": "*"
@@ -30,6 +29,7 @@
     "eslint-plugin-html": "^2.0.1",
     "eslint-plugin-promise": "^3.4.0",
     "eslint-plugin-standard": "^2.0.1",
+    "gulp": "^4.0.0",
     "gulp-browserify": "^0.5.1",
     "gulp-changed": "^1.3.2",
     "gulp-combine-mq": "^0.4.0",
