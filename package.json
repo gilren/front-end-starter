@@ -20,7 +20,7 @@
     "babel-loader": "^6.2.10",
     "babel-preset-env": "^1.1.8",
     "browser-sync": "^2.11.2",
-    "bootstrap": "*",
+    "bootstrap": "^4.2.1",
     "del": "^2.2.0",
     "eslint": "^3.13.1",
     "eslint-config-standard": "^7.0.0",
