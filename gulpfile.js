@@ -207,16 +207,6 @@ gulp.task('min-css', function () {
     .pipe($.concat('main.css'))
     .pipe(gulp.dest(bases.dist + '/' + path.css + '/'))
     .pipe($.if(min, $.rename('all.min.css')))
-    .pipe(
-      $.if(
-        min,
-        $.cssnano({
-          discardComments: {
-            removeAll: true
-          }
-        })
-      )
-    )
     .pipe($.if(min, gulp.dest(bases.dist + '/' + path.css + '/')))
 })
 
