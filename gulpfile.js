@@ -2,8 +2,6 @@ var min,
   bases,
   path,
   opts,
-  imagesOptions,
-  browserSupport,
   gulp,
   $,
   browserSync,
@@ -57,14 +55,6 @@ opts = {
   files: [bases.src + '/' + path.refresh]
 }
 
-imagesOptions = {
-  imageMin: {
-    optimizationLevel: 3,
-    progressive: true,
-    interlaced: true
-  }
-}
-
 posthtmlConfig = {
   plugins: [
     attrsSorter({
@@ -89,16 +79,15 @@ posthtmlConfig = {
   options: {}
 }
 
-browserSupport = ['ie >= 11', 'last 2 versions']
-
 /* ========================================================================
  *
  * Tasks
  * Available tasks:
  *   `gulp`
- *   `gulp min`
  *   `gulp prod`
- *   `gulp copy-bootstrap`
+ *   `gulp min-css`
+ *   `gulp min-js`
+ *   `gulp prod`
  *   `gulp bootstrap`
  *   `gulp clean`
  * ======================================================================== */
@@ -130,14 +119,7 @@ gulp.task('styles', function () {
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
     .pipe($.sass().on('error', $.sass.logError))
-    .pipe(
-      postcss([
-        autoprefixer({
-          browsers: browserSupport
-        })
-      ])
-    )
-    .pipe($.combineMq())
+    .pipe(postcss([autoprefixer()]))
     .pipe($.sourcemaps.write('./'))
     .pipe(gulp.dest(bases.src + '/' + path.css + '/'))
     .pipe(
@@ -185,22 +167,10 @@ gulp.task('min-js', function () {
     .pipe(
       $.if(
         min,
-        $.uglify({
-          preserveComments: 'none'
-        })
+        $.uglify()
       )
     )
     .pipe($.if(min, gulp.dest(bases.dist + '/' + path.js + '/')))
-})
-
-// minify images
-gulp.task('images', function () {
-  return gulp
-    .src([bases.src + '/' + path.img + '/**/*'])
-    .pipe($.plumber())
-    .pipe($.changed(bases.dist + '/' + path.img))
-    .pipe($.imagemin(imagesOptions))
-    .pipe(gulp.dest(bases.dist + '/' + path.img + '/'))
 })
 
 // Clean folder dist
@@ -247,6 +217,5 @@ gulp.task(
     'html',
     'copy',
     gulp.parallel('min-css', 'min-js'),
-    'images'
   )
 )
