@@ -1,25 +1,29 @@
 /* -----------------------------------------------------
    Variable
-   ----------------------------------------------------- *//* Colors
-  ========================================================================== *//* Typography
-  ========================================================================== */html {
-  font-size: 16px;
-}
+   ----------------------------------------------------- */
+/* Colors
+  ========================================================================== */
+/* Typography
+  ========================================================================== */
+html {
+  font-size: 16px; }
 
 body {
   font-family: Helvetica, Arial, sans-serif;
-  font-size: 1rem;
-}/* -----------------------------------------------------
+  font-size: 1rem; }
+
+/* -----------------------------------------------------
    Mixins
-   ----------------------------------------------------- *//* -----------------------------------------------------
+   ----------------------------------------------------- */
+/* -----------------------------------------------------
    Libs
-   ----------------------------------------------------- */.swiper-container {
+   ----------------------------------------------------- */
+.swiper-container {
   position: relative;
   z-index: 1;
   overflow: hidden;
   margin-right: auto;
-  margin-left: auto;
-}
+  margin-left: auto; }
 
 .swiper-wrapper {
   position: relative;
@@ -28,7 +32,7 @@ body {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-sizing: content-box;
-  box-sizing: content-box;
+          box-sizing: content-box;
   width: 100%;
   height: 100%;
   -webkit-transition-property: -webkit-transform;
@@ -36,16 +40,14 @@ body {
   transition-property: transform;
   transition-property: transform, -webkit-transform;
   -webkit-transform: translate3d(0px, 0, 0);
-  transform: translate3d(0px, 0, 0);
-}
+          transform: translate3d(0px, 0, 0); }
 
 .swiper-slide {
   position: relative;
   width: 100%;
   height: 100%;
   -ms-flex-negative: 0;
-  flex-shrink: 0;
-}
+      flex-shrink: 0; }
 
 .swiper-button-prev {
   position: absolute;
@@ -60,8 +62,7 @@ body {
   background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z'%20fill%3D'%23007aff'%2F%3E%3C%2Fsvg%3E");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 27px 44px;
-}
+  background-size: 27px 44px; }
 
 .swiper-button-next {
   position: absolute;
@@ -76,20 +77,17 @@ body {
   background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%23007aff'%2F%3E%3C%2Fsvg%3E");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 27px 44px;
-}
+  background-size: 27px 44px; }
 
 .swiper-button-prev.swiper-button-disabled {
   cursor: auto;
   pointer-events: none;
-  opacity: .35;
-}
+  opacity: .35; }
 
 .swiper-button-next.swiper-button-disabled {
   cursor: auto;
   pointer-events: none;
-  opacity: .35;
-}
+  opacity: .35; }
 
 .swiper-pagination {
   position: absolute;
@@ -98,18 +96,14 @@ body {
   -webkit-transition: 300ms;
   transition: 300ms;
   -webkit-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
-}
+          transform: translate3d(0, 0, 0); }
 
 .swiper-container-horizontal > .swiper-pagination-bullets {
   bottom: 10px;
   left: 0;
-  width: 100%;
-}
-
-.swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
-  margin: 0 5px;
-}
+  width: 100%; }
+  .swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
+    margin: 0 5px; }
 
 .swiper-pagination-bullet {
   display: inline-block;
@@ -117,39 +111,40 @@ body {
   height: 8px;
   opacity: .2;
   border-radius: 100%;
-  background: #000000;
-}
+  background: #000000; }
 
 button.swiper-pagination-bullet {
   margin: 0;
   padding: 0;
   border: none;
   -webkit-box-shadow: none;
-  box-shadow: none;
+          box-shadow: none;
   -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
+     -moz-appearance: none;
+          appearance: none; }
 
 .swiper-pagination-clickable .swiper-pagination-bullet {
-  cursor: pointer;
-}
+  cursor: pointer; }
 
 .swiper-pagination-bullet-active {
   opacity: 1;
-  background: #007aff;
-}/* -----------------------------------------------------
+  background: #007aff; }
+
+/* -----------------------------------------------------
    Layout
-   ----------------------------------------------------- *//* -----------------------------------------------------
-   Components
-   ----------------------------------------------------- */.swiper-container {
-  height: 300px;
-}/* -----------------------------------------------------
-   Pages
-   ----------------------------------------------------- */@media (min-width: 1024px) {
+   ----------------------------------------------------- */
+@media (min-width: 1024px) {
   .no-padding {
-    padding: 0;
-  }
-}
+    padding: 0; } }
+
+/* -----------------------------------------------------
+   Components
+   ----------------------------------------------------- */
+.swiper-container {
+  height: 300px; }
+
+/* -----------------------------------------------------
+   Pages
+   ----------------------------------------------------- */
 
 /*# sourceMappingURL=main.css.map */
