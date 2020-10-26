@@ -1,0 +1,21 @@
+.tooltip-item {
+  color: $accent;
+  font-weight: 700;
+  margin-left: 5px;
+}
+
+.page-link {
+  position: relative;
+
+  color: $accent;
+  border: none;
+  background-color: transparent;
+  &:hover {
+    color: $accent;
+  }
+}
+
+.page-item.active .page-link {
+  background-color: $accent;
+  border-color: $accent;
+}
