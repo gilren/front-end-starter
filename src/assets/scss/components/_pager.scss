@@ -1,21 +1,46 @@
-.tooltip-item {
-  color: $accent;
-  font-weight: 700;
-  margin-left: 5px;
+.pagination {
+  display: flex;
+  padding-left: 0;
+  list-style: none;
 }
 
 .page-link {
   position: relative;
-
+  display: block;
+  padding: 0.5rem 0.75rem;
+  line-height: 1.25;
   color: $accent;
-  border: none;
-  background-color: transparent;
+  text-decoration: none;
+
   &:hover {
-    color: $accent;
+    z-index: 2;
+    color: darken($accent, 10%);
+    text-decoration: none;
+  }
+
+  &:focus {
+    z-index: 3;
+    outline: $accent;
+    box-shadow: 0 0 0 0.2rem rgba($accent, 0.25);
   }
 }
 
-.page-item.active .page-link {
-  background-color: $accent;
-  border-color: $accent;
+.page-item {
+  &:first-child {
+    .page-link {
+      margin-left: 0;
+    }
+  }
+
+  &.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: $accent;
+  }
+
+  &.disabled .page-link {
+    color: grey;
+    pointer-events: none;
+    cursor: auto;
+  }
 }
