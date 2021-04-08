@@ -3,12 +3,14 @@ $(document).ready(function () {
   var mySwiper = new Swiper('.swiper-container', {
     loop: true,
 
-    pagination: '.swiper-pagination',
-    paginationClickable: true,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
 
-    nextButton: '.swiper-button-next',
-    prevButton: '.swiper-button-prev'
-
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    }
   })
-
 })
