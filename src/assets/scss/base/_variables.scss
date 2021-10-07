@@ -1,21 +1,12 @@
 /* Colors
   ========================================================================== */
 $accent: lightcoral;
+$black: #000000;
+$white: #ffffff;
 
 
 /* Typography
   ========================================================================== */
 
 $font-body: Helvetica, Arial, sans-serif;
-$font-title: Helvetica, Arial, sans-serif;
-$font-size: 14px;
-
-html {
-  font-size: 16px;
-}
-
-body {
-  font-family: $font-body;
-  font-size: 1rem;
-}
-
+$font-heading: Helvetica, Arial, sans-serif;
