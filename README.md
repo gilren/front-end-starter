@@ -24,3 +24,5 @@ $ gulp copy
 
 ### Swiper
 Full swiper scss : https://gist.github.com/gilren/de76d45adb23198a833a45e607d43915
+
+//https://piperhaywood.com/fluid-type-sizes-and-spacing/
