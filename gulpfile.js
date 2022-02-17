@@ -79,19 +79,6 @@ posthtmlConfig = {
   options: {}
 }
 
-/* ========================================================================
- *
- * Tasks
- * Available tasks:
- *   `gulp`
- *   `gulp prod`
- *   `gulp min-css`
- *   `gulp min-js`
- *   `gulp prod`
- *   `gulp bootstrap`
- *   `gulp clean`
- * ======================================================================== */
-
 // clean html
 gulp.task('html', function () {
   return gulp
@@ -106,9 +93,7 @@ gulp.task('bootstrap', function () {
   return gulp
     .src(bases.src + '/' + path.bootstrap_sass + '/**/*.scss')
     .pipe($.plumber())
-    .pipe($.sourcemaps.init())
     .pipe($.sass().on('error', $.sass.logError))
-    .pipe($.sourcemaps.write('./'))
     .pipe(gulp.dest(bases.src + '/' + path.css + '/vendor'))
 })
 
@@ -117,10 +102,8 @@ gulp.task('styles', function () {
   return gulp
     .src(bases.src + '/' + path.scss + '/*.scss')
     .pipe($.plumber())
-    .pipe($.sourcemaps.init())
     .pipe($.sass().on('error', $.sass.logError))
     .pipe(postcss([autoprefixer()]))
-    .pipe($.sourcemaps.write('./'))
     .pipe(gulp.dest(bases.src + '/' + path.css + '/'))
     .pipe(
       reload({
@@ -184,7 +167,8 @@ gulp.task('copy', function () {
     .src([
       bases.src + '/**/*.html',
       bases.src + '/favicon.ico',
-      bases.src + '/robots.txt'
+      bases.src + '/robots.txt',
+      bases.src + '/manifest.webmanifest'
     ])
     .pipe($.plumber())
     .pipe(gulp.dest(bases.dist))
@@ -199,6 +183,8 @@ gulp.task('watch', function () {
     }
   }
   browserSync(opts)
+
+
 
   gulp.watch(
     [bases.src + '/' + path.scss + '/**/*.scss'],
