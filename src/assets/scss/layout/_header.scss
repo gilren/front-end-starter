@@ -1,3 +1,44 @@
-/* -----------------------------------------------------
-   Header
-   ----------------------------------------------------- */
+.navbar-toggler {
+  outline: 1px solid $accent;
+  height: 40px;
+  width: 40px;
+
+  padding: 0;
+
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  z-index: 3;
+}
+
+.navbar-toggler .icon-bar {
+  background-color: $accent;
+  transform: rotate(0deg) translate(0px, 0px);
+  transition: ease all 0.2s;
+  display: block;
+  width: 20px;
+  height: 2px;
+  border-radius: 1px;
+  margin: 0 auto;
+}
+
+.navbar-toggler .icon-bar + .icon-bar {
+  margin-top: 4px;
+}
+
+.navbar-toggler[aria-expanded="true"] .icon-bar:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 4px);
+  transition: ease all 0.2s;
+}
+
+.navbar-toggler[aria-expanded="true"] .icon-bar:nth-child(2) {
+  opacity: 0;
+  transition: ease all 0.2s;
+}
+
+.navbar-toggler[aria-expanded="true"] .icon-bar:nth-child(3) {
+  transform: rotate(-45deg) translate(4px, -4px);
+  transition: ease all 0.2s;
+}

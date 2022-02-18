@@ -1,6 +1,12 @@
-/* -----------------------------------------------------
-   Utils
-   ----------------------------------------------------- */
+html {
+  position: relative;
+}
+
+img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
 
 .sr-only {
   position: absolute;
@@ -33,6 +39,10 @@
 
 .mb-5 {
   margin-bottom: 1.875em;
+}
+
+.mr-auto {
+  margin-right: auto;
 }
 
 .text-left {
