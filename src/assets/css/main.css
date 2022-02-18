@@ -1,20 +1,46 @@
 /* -----------------------------------------------------
-   Variable
+   Config
    ----------------------------------------------------- */
 /* Colors
   ========================================================================== */
 /* Typography
   ========================================================================== */
-html {
-  font-size: 16px; }
+:root {
+  --ft-size-body: clamp(1rem, 0.8333333333vw, 1.375rem);
+  --ft-size-h1: clamp(1.875rem, 1.5625vw, 2.578125rem);
+  --ft-size-h2: clamp(1.625rem, 1.3541666667vw, 2.234375rem);
+  --ft-size-h3: clamp(1.25rem, 1.0416666667vw, 1.71875rem);
+  --ft-size-h4: clamp(1rem, 0.8333333333vw, 1.375rem);
+  --ft-size-small: clamp(0.75rem, 0.625vw, 1.03125rem);
+}
 
 body {
   font-family: Helvetica, Arial, sans-serif;
-  font-size: 1rem; }
+  color: #000000;
+}
 
-/* -----------------------------------------------------
-   Mixins
-   ----------------------------------------------------- */
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: 700;
+}
+
+h1 {
+  font-family: Helvetica, Arial, sans-serif, serif;
+  font-size: 1.7rem;
+}
+
+a {
+  color: lightcoral;
+  -webkit-transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+a:hover {
+  color: #eb5252;
+}
+
 /* -----------------------------------------------------
    Libs
    ----------------------------------------------------- */
@@ -23,7 +49,8 @@ body {
   z-index: 1;
   overflow: hidden;
   margin-right: auto;
-  margin-left: auto; }
+  margin-left: auto;
+}
 
 .swiper-wrapper {
   position: relative;
@@ -40,14 +67,16 @@ body {
   transition-property: transform;
   transition-property: transform, -webkit-transform;
   -webkit-transform: translate3d(0px, 0, 0);
-          transform: translate3d(0px, 0, 0); }
+          transform: translate3d(0px, 0, 0);
+}
 
 .swiper-slide {
   position: relative;
   width: 100%;
   height: 100%;
   -ms-flex-negative: 0;
-      flex-shrink: 0; }
+      flex-shrink: 0;
+}
 
 .swiper-button-prev {
   position: absolute;
@@ -62,7 +91,8 @@ body {
   background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z'%20fill%3D'%23007aff'%2F%3E%3C%2Fsvg%3E");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 27px 44px; }
+  background-size: 27px 44px;
+}
 
 .swiper-button-next {
   position: absolute;
@@ -77,17 +107,20 @@ body {
   background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%23007aff'%2F%3E%3C%2Fsvg%3E");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 27px 44px; }
+  background-size: 27px 44px;
+}
 
 .swiper-button-prev.swiper-button-disabled {
   cursor: auto;
   pointer-events: none;
-  opacity: .35; }
+  opacity: 0.35;
+}
 
 .swiper-button-next.swiper-button-disabled {
   cursor: auto;
   pointer-events: none;
-  opacity: .35; }
+  opacity: 0.35;
+}
 
 .swiper-pagination {
   position: absolute;
@@ -96,22 +129,26 @@ body {
   -webkit-transition: 300ms;
   transition: 300ms;
   -webkit-transform: translate3d(0, 0, 0);
-          transform: translate3d(0, 0, 0); }
+          transform: translate3d(0, 0, 0);
+}
 
 .swiper-container-horizontal > .swiper-pagination-bullets {
   bottom: 10px;
   left: 0;
-  width: 100%; }
-  .swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
-    margin: 0 5px; }
+  width: 100%;
+}
+.swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
+  margin: 0 5px;
+}
 
 .swiper-pagination-bullet {
   display: inline-block;
   width: 8px;
   height: 8px;
-  opacity: .2;
+  opacity: 0.2;
   border-radius: 100%;
-  background: #000000; }
+  background: #000000;
+}
 
 button.swiper-pagination-bullet {
   margin: 0;
@@ -121,30 +158,207 @@ button.swiper-pagination-bullet {
           box-shadow: none;
   -webkit-appearance: none;
      -moz-appearance: none;
-          appearance: none; }
+          appearance: none;
+}
 
 .swiper-pagination-clickable .swiper-pagination-bullet {
-  cursor: pointer; }
+  cursor: pointer;
+}
 
 .swiper-pagination-bullet-active {
   opacity: 1;
-  background: #007aff; }
+  background: #007aff;
+}
 
 /* -----------------------------------------------------
    Layout
    ----------------------------------------------------- */
+html {
+  position: relative;
+}
+
+img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+.sr-only {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  white-space: nowrap;
+  border: 0;
+}
+
 @media (min-width: 1024px) {
   .no-padding {
-    padding: 0; } }
+    padding: 0;
+  }
+}
+.d-flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.d-inline-block {
+  display: inline-block;
+}
+
+.mb-5 {
+  margin-bottom: 1.875em;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.flex-column {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.justify-content-end {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.justify-content-center {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.align-items-center {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+@media (min-width: 992px) {
+  .flex-lg-row-reverse {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: row-reverse;
+            flex-direction: row-reverse;
+  }
+}
+.navbar-toggler {
+  outline: 1px solid lightcoral;
+  height: 40px;
+  width: 40px;
+  padding: 0;
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: 0;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  z-index: 3;
+}
+
+.navbar-toggler .icon-bar {
+  background-color: lightcoral;
+  -webkit-transform: rotate(0deg) translate(0px, 0px);
+          transform: rotate(0deg) translate(0px, 0px);
+  -webkit-transition: ease all 0.2s;
+  transition: ease all 0.2s;
+  display: block;
+  width: 20px;
+  height: 2px;
+  border-radius: 1px;
+  margin: 0 auto;
+}
+
+.navbar-toggler .icon-bar + .icon-bar {
+  margin-top: 4px;
+}
+
+.navbar-toggler[aria-expanded=true] .icon-bar:nth-child(1) {
+  -webkit-transform: rotate(45deg) translate(5px, 4px);
+          transform: rotate(45deg) translate(5px, 4px);
+  -webkit-transition: ease all 0.2s;
+  transition: ease all 0.2s;
+}
+
+.navbar-toggler[aria-expanded=true] .icon-bar:nth-child(2) {
+  opacity: 0;
+  -webkit-transition: ease all 0.2s;
+  transition: ease all 0.2s;
+}
+
+.navbar-toggler[aria-expanded=true] .icon-bar:nth-child(3) {
+  -webkit-transform: rotate(-45deg) translate(4px, -4px);
+          transform: rotate(-45deg) translate(4px, -4px);
+  -webkit-transition: ease all 0.2s;
+  transition: ease all 0.2s;
+}
 
 /* -----------------------------------------------------
    Components
    ----------------------------------------------------- */
 .swiper-container {
-  height: 300px; }
+  height: 300px;
+}
+
+.pagination {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+}
+
+.page-link {
+  position: relative;
+  display: block;
+  padding: 0.5rem 0.75rem;
+  line-height: 1.25;
+  color: lightcoral;
+  text-decoration: none;
+}
+.page-link:hover {
+  z-index: 2;
+  color: #eb5252;
+  text-decoration: none;
+}
+.page-link:focus {
+  z-index: 3;
+  outline: lightcoral;
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(240, 128, 128, 0.25);
+          box-shadow: 0 0 0 0.2rem rgba(240, 128, 128, 0.25);
+}
+
+.page-item:first-child .page-link {
+  margin-left: 0;
+}
+.page-item.active .page-link {
+  z-index: 3;
+  color: #fff;
+  background-color: lightcoral;
+}
+.page-item.disabled .page-link {
+  color: grey;
+  pointer-events: none;
+  cursor: auto;
+}
 
 /* -----------------------------------------------------
    Pages
    ----------------------------------------------------- */
-
-/*# sourceMappingURL=main.css.map */

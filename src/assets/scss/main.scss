@@ -1,36 +1,35 @@
 /* -----------------------------------------------------
    Config
    ----------------------------------------------------- */
-@import 'base/variables';
-@import 'base/mixins';
+@import "base/variables";
+@import "base/mixins";
 
-@import 'base/typography;'
+@import "base/typography";
 
 /* -----------------------------------------------------
    Libs
    ----------------------------------------------------- */
-@import 'vendor/swiper';
+@import "vendor/swiper";
 
 /* -----------------------------------------------------
    Layout
    ----------------------------------------------------- */
-@import 'layout/utils';
-@import 'layout/header';
-@import 'layout/sidebar';
-@import 'layout/footer';
+@import "layout/utils";
+@import "layout/header";
+@import "layout/sidebar";
+@import "layout/footer";
 
 /* -----------------------------------------------------
    Components
    ----------------------------------------------------- */
-@import 'components/navigation';
-@import 'components/hero';
-@import 'components/buttons';
-@import 'components/gallery';
+@import "components/hero";
+@import "components/buttons";
+@import "components/gallery";
 @import "components/pager";
 
 /* -----------------------------------------------------
    Pages
    ----------------------------------------------------- */
-@import 'pages/home';
-@import 'pages/page';
-@import 'pages/contact';
+@import "pages/home";
+@import "pages/page";
+@import "pages/contact";

@@ -1,18 +1,56 @@
-html {
-  font-size: 62.5%; // 1rem = 10px, 3.5rem = 35px;
+$ft-screen-width: 1920;
+$ft-body: 16;
+$ft-body-min: 1rem;
+$ft-body-max: 1.375rem;
+$ft-body-vw: $ft-body / $ft-screen-width * 100vw;
+
+$ft-sizes: (
+  h1: 30,
+  h2: 26,
+  h3: 20,
+  h4: 16,
+  small: 12,
+);
+
+@mixin sizeVar($name, $size) {
+  $proportion: $size / $ft-body;
+  $min: $ft-body-min * $proportion;
+  $max: $ft-body-max * $proportion;
+  $vw: $ft-body-vw * $proportion;
+  --ft-size-#{$name}: clamp(#{$min}, #{$vw}, #{$max});
+}
+
+:root {
+  --ft-size-body: clamp(#{$ft-body-min}, #{$ft-body-vw}, #{$ft-body-max});
+  @each $name, $size in $ft-sizes {
+    @include sizeVar($name, $size);
+  }
 }
 
 body {
   font-family: $font-body;
-  font-size: 1.6rem;
   color: $black;
 }
 
-h1,h2,h3,h4,h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
   font-weight: 700;
 }
 
 h1 {
   font-family: $font-heading, serif;
   font-size: 1.7rem;
+}
+
+a {
+  color: $accent;
+
+  @include m-ease-in-out(color);
+
+  &:hover {
+    color: darken($accent, 10%);
+  }
 }
