@@ -27,3 +27,4 @@ Full swiper scss : https://gist.github.com/gilren/de76d45adb23198a833a45e607d439
 
 //https://piperhaywood.com/fluid-type-sizes-and-spacing/
 //https://dev.to/masakudamatsu/favicon-nightmare-how-to-maintain-sanity-3al7
+//https://css-tricks.com/linearly-scale-font-size-with-css-clamp-based-on-the-viewport/
