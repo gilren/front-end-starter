@@ -1,4 +1,4 @@
-# Front end boilerplate - Bootstrap 4
+# Front end boilerplate
 
 ### Installation
 You need Gulp installed globally:
