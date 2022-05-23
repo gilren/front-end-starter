@@ -25,6 +25,6 @@ $ gulp copy
 ### Swiper
 Full swiper scss : https://gist.github.com/gilren/de76d45adb23198a833a45e607d43915
 
-//https://piperhaywood.com/fluid-type-sizes-and-spacing/
-//https://dev.to/masakudamatsu/favicon-nightmare-how-to-maintain-sanity-3al7
-//https://css-tricks.com/linearly-scale-font-size-with-css-clamp-based-on-the-viewport/
+https://piperhaywood.com/fluid-type-sizes-and-spacing/
+[https://dev.to/masakudamatsu/favicon-nightmare-how-to-maintain-sanity-3al7](https://evilmartians.com/chronicles/how-to-favicon-in-2021-six-files-that-fit-most-needs)
+https://css-tricks.com/linearly-scale-font-size-with-css-clamp-based-on-the-viewport/
