@@ -26,6 +26,7 @@ $ gulp copy
 Full swiper scss : https://gist.github.com/gilren/de76d45adb23198a833a45e607d43915
 
 https://piperhaywood.com/fluid-type-sizes-and-spacing/
+https://utopia.fyi/type/calculator/
 
 https://evilmartians.com/chronicles/how-to-favicon-in-2021-six-files-that-fit-most-needs
 
