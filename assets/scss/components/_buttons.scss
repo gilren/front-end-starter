@@ -1,0 +1,55 @@
+.btn-primary {
+  background: var(--accent-color);
+  padding: 8px 20px;
+  color: var(--white);
+  text-transform: uppercase;
+
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  display: inline-block;
+  border: none;
+
+  &:hover {
+    transition: 500ms all var(--transition);
+    background: darken(#009b3a, 10%);
+  }
+}
+
+.btn-icon {
+  vertical-align: middle;
+  svg {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+.btn-search {
+  border: 1px solid var(--nav-search-border-color);
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  background: transparent;
+}
+
+.btn-lg {
+  padding: 13px 20px;
+  font-size: 17px;
+}
+
+.btn-share {
+  color: var(--accent-color);
+  text-decoration: none;
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  font-weight: 700;
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+}

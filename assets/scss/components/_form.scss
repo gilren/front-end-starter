@@ -1,0 +1,29 @@
+input[type='text'],
+input[type='email'],
+input[type='password'] {
+  border: 1px solid var(--beige);
+  padding: 11px 16px;
+  width: 100%;
+  &::placeholder {
+    color: var(--blue);
+    opacity: 1;
+  }
+}
+
+input[type='search'] {
+  border: 2px solid var(--blue);
+  padding: 11px 16px;
+  width: 100%;
+  &::placeholder {
+    color: var(--blue);
+    opacity: 1;
+  }
+}
+
+.form-label {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+  margin-bottom: 15px;
+  display: block;
+}

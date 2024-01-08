@@ -1,0 +1,106 @@
+@at-root {
+  :root {
+    --container-size: 100%;
+    --bs-gutter-x: 30px;
+
+    @media (min-width: 480px) {
+      --container-size: 440px;
+    }
+
+    @media (min-width: 576px) {
+      --container-size: 536px;
+    }
+
+    @media (min-width: 768px) {
+      --container-size: 668px;
+    }
+
+    @media (min-width: 992px) {
+      --container-size: 960px;
+    }
+
+    @media (min-width: 1200px) {
+      --container-size: 1140px;
+    }
+
+    @media (min-width: 1440px) {
+      --container-size: 1410px;
+    }
+
+    @media (min-width: 1600px) {
+      --container-size: 1570px;
+    }
+
+    @media (min-width: 1920px) {
+      --container-size: 1780px;
+    }
+  }
+}
+
+.wrapper {
+  width: 100%;
+  @include up(1200) {
+    max-width: 1790px;
+    margin: 0 auto;
+  }
+}
+
+.container {
+  --bs-gutter-x: 30px;
+
+  position: relative;
+
+  max-width: var(--container-size);
+}
+
+.row {
+  --bs-gutter-x: 30px;
+}
+
+.offset-xl-n-1 {
+  @include up(1200) {
+    margin-left: -8.33333333%;
+  }
+}
+
+@media (min-width: 0px) and (max-width: 7680px) {
+  #chrome-extension-css-grid-overlay-container {
+    background-color: rgba(0, 191, 165, 0.3);
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    pointer-events: none;
+    position: fixed;
+    z-index: 13371337;
+    opacity: 0.5;
+  }
+
+  #chrome-extension-css-grid-overlay-0 {
+    background-color: rgba(0, 231, 255, 0.3);
+    display: flex;
+    height: 100%;
+    margin: 0 auto;
+    max-width: 1750px;
+  }
+
+  .chrome-extension-css-grid-overlay__column {
+    background-color: rgba(234, 23, 140, 0.3);
+    border-left: 1px solid #ea178c;
+    border-right: 1px solid #ea178c;
+    box-sizing: border-box;
+    height: 100%;
+    margin: 0 15px;
+    width: calc(100% / 12);
+  }
+
+  .chrome-extension-css-grid-overlay__column:first-child {
+    margin-left: 0;
+  }
+
+  .chrome-extension-css-grid-overlay__column:last-child {
+    margin-right: 0;
+  }
+}
